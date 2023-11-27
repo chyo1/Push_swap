@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 14:52:32 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/27 15:00:03 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/27 19:03:34 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,35 +39,23 @@ t_node	*get_prelast_node(t_node *node)
 
 int	reverse_rotate_a(t_node **s1)
 {
-	t_node	*pre_last;
-	t_node	*last;
+	t_node	*node;
 
-	if (*s1 && (*s1)->next != NULL)
-	{
-		pre_last = get_prelast_node(*s1);
-		last = pre_last->next;
-		last->next = *s1;
-		*s1 = last;
-		pre_last->next = NULL;
-		return (1);
-	}
-	return (0);
+	node = pop_back(s1);
+	if (node == NULL)
+		return (0);
+	push_front(s1, node);
+	return (1);
 }
 
 int	reverse_rotate_b(t_node **s2)
 {
-	t_node	*pre_last;
-	t_node	*last;
+	t_node	*node;
 
-	if (*s2 && (*s2)->next != NULL)
-	{
-		pre_last = get_prelast_node(*s2);
-		last = pre_last->next;
-		last->next = *s2;
-		*s2 = last;
-		pre_last->next = NULL;
-		return (1);
-	}
-	return (0);
+	node = pop_back(s2);
+	if (node == NULL)
+		return (0);
+	push_front(s2, node);
+	return (1);
 }
 

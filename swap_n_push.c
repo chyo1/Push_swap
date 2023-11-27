@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:49 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/27 17:29:11 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/27 17:32:51 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,42 +56,18 @@ void	swap(t_node *a, t_node *b, char which)
 
 void	push_a(t_node **s1, t_node **s2)
 {
-	t_node	*a_fir;
-	t_node	*a_sec;
-	t_node	*b_fir;
-	t_node	*b_sec;
+	t_node	*node;
 
-	if (*s2 == NULL)
-		return ;
-	b_fir = *s2;
-	b_sec = b_fir->next;
-
-	a_fir = *s1;
-	a_sec = a_fir->next;
-
-	b_fir->next = a_fir;
-	*s1 = b_fir;
-	*s2 = b_sec;
+	node = pop_front(s2);
+	push_front(s1, node);
 	write(1, "pa\n", 3);
 }
 
 void	push_b(t_node **s1, t_node **s2)
 {
-	t_node	*a_fir;
-	t_node	*a_sec;
-	t_node	*b_fir;
-	t_node	*b_sec;
-
-	if (*s2 == NULL)
-		return ;
-	b_fir = *s2;
-	b_sec = b_fir->next;
-
-	a_fir = *s1;
-	a_sec = a_fir->next;
-
-	a_fir->next = b_fir;
-	*s2 = a_fir;
-	*s1 = a_sec;
+	t_node	*node;
+	
+	node = pop_front(s2);
+	push_front(s1, node);
 	write(1, "pb\n", 3);
 }
