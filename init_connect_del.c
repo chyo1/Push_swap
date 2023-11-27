@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:13 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/23 17:03:19 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/27 12:40:58 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ int	make_node(t_node **root, int val)
 	if (new == NULL)
 		return (-1); // malloc error
 	new->val = val;
+	new->is_last = 0;
 	new->next = NULL;
 	last->next = new;
 }
