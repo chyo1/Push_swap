@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:13:38 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/23 16:40:08 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:58:53 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,10 +49,9 @@ int	parsing(const char *str, t_node **root)
 			str++;
 			flag = 1;
 		}
-		if (!flag) // check blank input
+		// check blank input & malloc error
+		if (!flag || make_node(root, minus * num) == -1)
 			return (-1);
-		else
-			make_node(root, minus * num);
 	}
 	return (1);
 }

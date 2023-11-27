@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:28 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/27 12:40:51 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/27 15:54:08 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@
 
 typedef struct s_node
 {
-	int		val;
-	int		is_last;
-	s_node	*next;
-
+	int				val;
+	int				is_last;
+	struct s_node	*pre;
+	struct s_node	*next;
 }	t_node;
 
 

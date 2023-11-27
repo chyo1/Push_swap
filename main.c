@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:19:41 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/23 16:54:26 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/27 16:03:48 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 int	main(int argc, char **argv)
 {
 	unsigned int	i;
-	t_node			*root_a;
-	t_node			*root_b;
+	t_node			*head_a;
+	t_node			*head_b;
 
 	i = 1;
 	while (i < argc)
