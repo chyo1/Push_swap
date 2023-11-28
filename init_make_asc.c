@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:55:58 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/27 19:33:53 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:14:43 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	asc_2(t_node **a, t_node **b)
 	sec = (*a)->next;
 	
 	if (fir->val < sec->val)
-		swap_ab(*a, *b, 'a');
+		swap(*a, *b, 'a');
 	push_b(a, b);
 	push_b(a, b);
 }
@@ -40,7 +40,7 @@ void	asc_3(t_node **a, t_node **b)
 	i = -1;
 	// a b c / a c b / b c a --> b a c / c a b / c b a
 	if (fir->val < sec->val)
-		swap_ab(*a, *b, 'a');
+		swap(*a, *b, 'a');
 	if (fir->val < thi->val && sec->val < thi->val)
 		flag = 0;
 	else if (thi->val < fir->val && thi->val < sec->val)
@@ -54,7 +54,8 @@ void	asc_3(t_node **a, t_node **b)
 		push_b(a, b);
 	}
 }
-void asc_4(t_node **a, t_node **b)
+
+void	asc_4(t_node **a, t_node **b)
 {
 	t_node	*n[4];
 
@@ -76,7 +77,7 @@ void asc_4(t_node **a, t_node **b)
 	asc_3(a, b);
 }
 
-void asc_5(t_node **a, t_node **b)
+void	asc_5(t_node **a, t_node **b)
 {
 	t_node	*n[5];
 

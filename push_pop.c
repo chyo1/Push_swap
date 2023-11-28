@@ -6,13 +6,13 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:34:18 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/27 17:26:14 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/28 11:13:43 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void push_front(t_node **head, t_node *new)
+void	push_front(t_node **head, t_node *new)
 {
 	if (*head == NULL)
 	{
@@ -31,7 +31,7 @@ void push_front(t_node **head, t_node *new)
 	}
 }
 
-void push_back(t_node **head, t_node *new)
+void	push_back(t_node **head, t_node *new)
 {
 	if (*head == NULL)
 	{
