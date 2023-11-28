@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:28 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/28 11:15:26 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/28 15:18:24 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,13 +24,16 @@ typedef struct s_node
 	struct s_node	*next;
 }	t_node;
 
+# define ASC 0
+# define DESC 1
+
 // main.c
 int		main(int argc, char **argv);
-
+void	print_list(t_node **head); //
 // parsing.c
 void	check_space(const char **str);
 void	check_sign(const char **str, int *minus);
-int		parsing(const char *str, t_node **root);
+int		parsing(const char *str, t_node **root, int *cnt);
 
 // init_connect_del.c
 int		make_node(t_node **head, int val);
@@ -61,14 +64,19 @@ int		reverse_rotate_a(t_node **s1);
 int		reverse_rotate_b(t_node **s2);
 
 // init_make_asc.c
-void	asc_2(t_node **a, t_node **b);
+void	asc_12(t_node **a, t_node **b, int cnt);
 void	asc_3(t_node **a, t_node **b);
 void	asc_4(t_node **a, t_node **b);
 void	asc_5(t_node **a, t_node **b);
 
 // init_make_desc.c
+void	desc_12(t_node **a, t_node **b, int cnt);
 void	desc_2(t_node **a, t_node **b);
 void	desc_3(t_node **a, t_node **b);
 void	desc_4(t_node **a, t_node **b);
 void	desc_5(t_node **a, t_node **b);
+
+// merge.c
+void	init_div(t_node **a, t_node **b, int cnt, int order);
+void	order_under_6(t_node **a, t_node **b, int cnt, int order);
 #endif

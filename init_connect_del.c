@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:13 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/28 11:17:01 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/28 12:03:31 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,31 +14,31 @@
 
 int	make_node(t_node **head, int val)
 {
-	t_node	*new;
+	t_node	*new_node;
 	t_node	*last;
 
 	last = *head;
-	new = (t_node *)malloc(sizeof(t_node));
-	if (new == NULL)
+	new_node = (t_node *)malloc(sizeof(t_node));
+	if (new_node == NULL)
 		return (-1);
-	new->val = val;
+	new_node->val = val;
 	if (*head == NULL)
 	{
-		push_back(head, new);
+		push_back(head, new_node);
 		return (0);
 	}
 	while (last != NULL)
 	{
 		if (last->val == val)
 		{
-			free(new);
+			free(new_node);
 			return (-1); // num duplicated
 		}
 		if (last->next == *head)
 			break ;
 		last = last->next;
 	}
-	push_back(head, new);
+	push_back(head, new_node);
 	return (0);
 }
 
@@ -49,7 +49,7 @@ void	free_list(t_node **head)
 
 	now = *head;
 	del = *head;
-	while (now->next == *head)
+	while (now->next != *head)
 	{
 		del = now;
 		now = now->next;

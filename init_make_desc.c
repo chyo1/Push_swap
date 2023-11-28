@@ -6,17 +6,22 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:32:33 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/28 11:17:11 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/28 17:29:49 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	desc_2(t_node **a, t_node **b)
+void	desc_12(t_node **a, t_node **b, int cnt)
 {
 	t_node	*fir;
 	t_node	*sec;
-	
+
+	if (cnt == 1)
+	{
+		push_b(a, b);
+		return ;
+	}
 	fir = *a;
 	sec = (*a)->next;
 	
@@ -38,15 +43,15 @@ void	desc_3(t_node **a, t_node **b)
 	sec = fir->next;
 	thi = fir->pre;
 	i = -1;
-	// a b c / a c b / b c a --> b a c / c a b / c b a
+	// b a c / c a b / c b a --> a b c / a c b / b c a
 	if (sec->val < fir->val)
 		swap(*a, *b, 'a');
-	if (fir->val < thi->val && sec->val < thi->val)
-		flag = 2;
-	else if (thi->val < fir->val && thi->val < sec->val)
-		flag = 1;
-	else
+	if (thi->val < fir->val && thi->val < sec->val)
 		flag = 0;
+	else if (fir->val < thi->val && sec->val < thi->val)
+		flag = 2;
+	else
+		flag = 1;
 	while (++i < 3)
 	{
 		if (i == flag)
@@ -57,12 +62,12 @@ void	desc_3(t_node **a, t_node **b)
 
 void	desc_4(t_node **a, t_node **b)
 {
-	t_node	*n[4];
+	int	n[4];
 
-	n[0] = *a;
-	n[1] = n[0]->next;
-	n[2] = n[1]->next;
-	n[3] = n[0]->pre;
+	n[0] = (*a)->val;
+	n[1] = ((*a)->next)->val;
+	n[2] = (((*a)->next)->next)->val;
+	n[3] = ((*a)->pre)->val;
 	if (n[0] < n[1] && n[0] < n[2] && n[0] < n[3])
 		;
 	else if (n[1] < n[0] && n[1] < n[2] && n[1] < n[3])
@@ -74,18 +79,19 @@ void	desc_4(t_node **a, t_node **b)
 	}
 	else
 		reverse_rotate(a, b, 'a');
+	push_b(a, b);
 	desc_3(a, b);
 }
 
 void	desc_5(t_node **a, t_node **b)
 {
-	t_node	*n[5];
+	int	n[5];
 
-	n[0] = *a;
-	n[1] = n[0]->next;
-	n[2] = n[1]->next;
-	n[3] = n[0]->pre;
-	n[4] = n[3]->pre;
+	n[0] = (*a)->val;
+	n[1] = ((*a)->next)->val;
+	n[2] = (((*a)->next)->next)->val;
+	n[3] = ((*a)->pre)->val;
+	n[4] = (((*a)->pre)->pre)->val;
 	if (n[0] < n[1] && n[0] < n[2] && n[0] < n[3] && n[0] < n[4])
 		;
 	else if (n[1] < n[0] && n[1] < n[2] && n[1] < n[3] && n[1] < n[4])
@@ -101,7 +107,7 @@ void	desc_5(t_node **a, t_node **b)
 	{
 		reverse_rotate(a, b, 'a');
 		reverse_rotate(a, b, 'a');
-		swap(*a, *b, 'a');
 	}
+	push_b(a, b);
 	desc_4(a, b);
 }

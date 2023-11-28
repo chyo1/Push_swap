@@ -6,17 +6,23 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:55:58 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/28 11:14:43 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/28 17:35:07 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	asc_2(t_node **a, t_node **b)
+void	asc_12(t_node **a, t_node **b, int cnt)
 {
 	t_node	*fir;
 	t_node	*sec;
 	
+	if (cnt == 1)
+	{
+		push_b(a, b);
+		return ;
+	}
+
 	fir = *a;
 	sec = (*a)->next;
 	
@@ -44,9 +50,9 @@ void	asc_3(t_node **a, t_node **b)
 	if (fir->val < thi->val && sec->val < thi->val)
 		flag = 0;
 	else if (thi->val < fir->val && thi->val < sec->val)
-		flag = 1;
-	else
 		flag = 2;
+	else
+		flag = 1;
 	while (++i < 3)
 	{
 		if (i == flag)
@@ -57,35 +63,36 @@ void	asc_3(t_node **a, t_node **b)
 
 void	asc_4(t_node **a, t_node **b)
 {
-	t_node	*n[4];
+	int	n[4];
 
-	n[0] = *a;
-	n[1] = n[0]->next;
-	n[2] = n[1]->next;
-	n[3] = n[0]->pre;
+	n[0] = (*a)->val;
+	n[1] = ((*a)->next)->val;
+	n[2] = ((*a)->pre)->val;
+	n[3] =(((*a)->next)->next)->val;
 	if (n[1] < n[0] && n[2] < n[0] && n[3] < n[0])
 		;
 	else if (n[0] < n[1] && n[2] < n[1] && n[3] < n[1])
 		swap(*a, *b, 'a');
 	else if (n[0] < n[2] && n[1] < n[2] && n[3] < n[2])
-	{
 		rotate(a, b, 'a');
-		swap(*a, *b, 'a');
-	}
 	else
+	{
 		reverse_rotate(a, b, 'a');
+		reverse_rotate(a, b, 'a');
+	}
+	push_b(a, b);
 	asc_3(a, b);
 }
 
 void	asc_5(t_node **a, t_node **b)
 {
-	t_node	*n[5];
+	int	n[5];
 
-	n[0] = *a;
-	n[1] = n[0]->next;
-	n[2] = n[1]->next;
-	n[3] = n[0]->pre;
-	n[4] = n[3]->pre;
+	n[0] = (*a)->val;
+	n[1] = ((*a)->next)->val;
+	n[2] = (((*a)->next)->next)->val;
+	n[3] = ((*a)->pre)->val;
+	n[4] = (((*a)->pre)->pre)->val;
 	if (n[1] < n[0] && n[2] < n[0] && n[3] < n[0] && n[4] < n[0])
 		;
 	else if (n[0] < n[1] && n[2] < n[1] && n[3] < n[1] && n[4] < n[1])
@@ -101,7 +108,7 @@ void	asc_5(t_node **a, t_node **b)
 	{
 		reverse_rotate(a, b, 'a');
 		reverse_rotate(a, b, 'a');
-		swap(*a, *b, 'a');
 	}
+	push_b(a, b);
 	asc_4(a, b);
 }

@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:13:38 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/28 11:17:50 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/28 14:49:14 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,12 +28,11 @@ void	check_sign(const char **str, int *minus)
 	}
 }
 
-int	parsing(const char *str, t_node **root)
+int	parsing(const char *str, t_node **root, int *cnt)
 {
 	long long	num;
 	int			minus;
 	int			flag;
-
 	while (*str)
 	{
 		num = 0;
@@ -52,6 +51,7 @@ int	parsing(const char *str, t_node **root)
 		// check blank input & malloc error
 		if (!flag || make_node(root, minus * num) == -1)
 			return (-1);
+		(*cnt)++;
 	}
 	return (1);
 }
