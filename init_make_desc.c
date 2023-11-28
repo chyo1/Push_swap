@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:32:33 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/28 17:29:49 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/28 18:30:39 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,22 +64,30 @@ void	desc_4(t_node **a, t_node **b)
 {
 	int	n[4];
 
-	n[0] = (*a)->val;
-	n[1] = ((*a)->next)->val;
-	n[2] = (((*a)->next)->next)->val;
-	n[3] = ((*a)->pre)->val;
+	n[0] = (*a)->val; // fir
+	n[1] = ((*a)->next)->val; // sec
+	n[2] = (((*a)->next)->next)->val; // third
+	n[3] = ((*a)->pre)->val; // last
 	if (n[0] < n[1] && n[0] < n[2] && n[0] < n[3])
-		;
+		push_b(a, b);
 	else if (n[1] < n[0] && n[1] < n[2] && n[1] < n[3])
+	{
 		swap(*a, *b, 'a');
+		push_b(a, b);
+	}
 	else if (n[2] < n[0] && n[2] < n[1] && n[2] < n[3])
 	{
 		rotate(a, b, 'a');
 		swap(*a, *b, 'a');
+		push_b(a, b);
+		reverse_rotate(a, b, 'a');
 	}
 	else
+	{
 		reverse_rotate(a, b, 'a');
-	push_b(a, b);
+		push_b(a, b);
+		rotate(a, b, 'a');
+	}
 	desc_3(a, b);
 }
 
@@ -87,27 +95,41 @@ void	desc_5(t_node **a, t_node **b)
 {
 	int	n[5];
 
-	n[0] = (*a)->val;
-	n[1] = ((*a)->next)->val;
-	n[2] = (((*a)->next)->next)->val;
-	n[3] = ((*a)->pre)->val;
-	n[4] = (((*a)->pre)->pre)->val;
+	n[0] = (*a)->val; // fir
+	n[1] = ((*a)->next)->val; // sec
+	n[2] = (((*a)->next)->next)->val; // third
+	n[3] = ((*a)->pre)->val; // last
+	n[4] = (((*a)->pre)->pre)->val; // pre-last
 	if (n[0] < n[1] && n[0] < n[2] && n[0] < n[3] && n[0] < n[4])
-		;
+	{
+		push_b(a, b);
+		reverse_rotate(a, b, 'a');
+	}
 	else if (n[1] < n[0] && n[1] < n[2] && n[1] < n[3] && n[1] < n[4])
+	{
 		swap(*a, *b, 'a');
+		push_b(a, b);
+		reverse_rotate(a, b, 'a');
+	}
 	else if (n[2] < n[0] && n[2] < n[1] && n[2] < n[3] && n[2] < n[4])
 	{
 		rotate(a, b, 'a');
 		swap(*a, *b, 'a');
+		push_b(a, b);
+		reverse_rotate(a, b, 'a');
+		reverse_rotate(a, b, 'a');
 	}
 	else if (n[3] < n[0] && n[3] < n[1] && n[3] < n[2] && n[3] < n[4])
+	{
 		reverse_rotate(a, b, 'a');
+		push_b(a, b);
+	}
 	else
 	{
 		reverse_rotate(a, b, 'a');
 		reverse_rotate(a, b, 'a');
+		push_b(a, b);
+		rotate(a, b, 'a');
 	}
-	push_b(a, b);
 	desc_4(a, b);
 }
