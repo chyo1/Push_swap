@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:49 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/28 16:21:26 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:46:28 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ int	swap_a(t_node *a)
 		return (0);
 	fir = a;
 	sec = a->next;
-	tmp = a->val;
+	tmp = fir->val;
 	fir->val = sec->val;
 	sec->val = tmp;
 	return (1);
@@ -48,7 +48,7 @@ int	swap_b(t_node *b)
 		return (0);
 	fir = b;
 	sec = b->next;
-	tmp = b->val;
+	tmp = fir->val;
 	fir->val = sec->val;
 	sec->val = tmp;
 	return (1);
@@ -68,7 +68,7 @@ void	push_a(t_node **s1, t_node **s2)
 void	push_b(t_node **s1, t_node **s2)
 {
 	t_node	*node;
-	
+
 	node = pop_front(s1);
 	if (node == NULL)
 		return ;

@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:28 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/28 15:18:24 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/29 17:24:24 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,11 +15,12 @@
 
 # include <unistd.h>
 # include <stdlib.h>
+# include <stdio.h>
 
 typedef struct s_node
 {
-	int					val;
-	int					is_last;
+	int				val;
+	int				is_last;
 	struct s_node	*pre;
 	struct s_node	*next;
 }	t_node;
@@ -27,10 +28,19 @@ typedef struct s_node
 # define ASC 0
 # define DESC 1
 
+# define TO_A 0
+# define TO_B 1
+
+# define FALSE 0
+# define TRUE 1
+
+# define INT_MAX 2147483648
+# define INT_MIN -2147483649
+
 // main.c
 int		main(int argc, char **argv);
 void	print_list(t_node **head); //
-// parsing.c
+// init_parsing.c
 void	check_space(const char **str);
 void	check_sign(const char **str, int *minus);
 int		parsing(const char *str, t_node **root, int *cnt);
@@ -76,7 +86,22 @@ void	desc_3(t_node **a, t_node **b);
 void	desc_4(t_node **a, t_node **b);
 void	desc_5(t_node **a, t_node **b);
 
-// merge.c
+// init_divide.c
 void	init_div(t_node **a, t_node **b, int cnt, int order);
+int		check_order(t_node *head);
 void	order_under_6(t_node **a, t_node **b, int cnt, int order);
+
+// merge.c
+void	merge(t_node **a, t_node **b, int cnt[], int to_where);
+void	merge_to_a(t_node **a, t_node **b, int div);
+void	merge_to_b(t_node **a, t_node **b, int div);
+
+// merge_to_a.c
+void	asc_to_a(t_node **a, t_node **b);
+void	desc_to_a(t_node **a, t_node **b);
+
+// merge_to_b.c
+void	asc_to_b(t_node **a, t_node **b);
+void	desc_to_b(t_node **a, t_node **b);
+
 #endif

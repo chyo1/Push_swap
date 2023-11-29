@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:55:58 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/28 18:30:00 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/29 18:20:36 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ void	asc_12(t_node **a, t_node **b, int cnt)
 		swap(*a, *b, 'a');
 	push_b(a, b);
 	push_b(a, b);
+	(*b)->is_last = TRUE;
 }
 
 void	asc_3(t_node **a, t_node **b)
@@ -57,8 +58,10 @@ void	asc_3(t_node **a, t_node **b)
 	{
 		if (i == flag)
 			reverse_rotate(a, b, 'a');
+		
 		push_b(a, b);
 	}
+	(*b)->is_last = TRUE;
 }
 
 void	asc_4(t_node **a, t_node **b)

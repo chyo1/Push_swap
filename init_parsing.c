@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   init_parsing.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:13:38 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/28 14:49:14 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/29 16:12:53 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ void	check_sign(const char **str, int *minus)
 	}
 }
 
-int	parsing(const char *str, t_node **root, int *cnt)
+int	parsing(const char *str, t_node **head, int *cnt)
 {
 	long long	num;
 	int			minus;
@@ -49,7 +49,7 @@ int	parsing(const char *str, t_node **root, int *cnt)
 			flag = 1;
 		}
 		// check blank input & malloc error
-		if (!flag || make_node(root, minus * num) == -1)
+		if (!flag || make_node(head, minus * num) == -1)
 			return (-1);
 		(*cnt)++;
 	}

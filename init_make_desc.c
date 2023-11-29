@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:32:33 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/28 18:30:39 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/29 12:57:14 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	desc_12(t_node **a, t_node **b, int cnt)
 		swap(*a, *b, 'a');
 	push_b(a, b);
 	push_b(a, b);
+	(*b)->is_last = TRUE;
 }
 
 void	desc_3(t_node **a, t_node **b)
@@ -58,6 +59,7 @@ void	desc_3(t_node **a, t_node **b)
 			reverse_rotate(a, b, 'a');
 		push_b(a, b);
 	}
+		(*b)->is_last = TRUE;
 }
 
 void	desc_4(t_node **a, t_node **b)

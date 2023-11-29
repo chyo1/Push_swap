@@ -5,59 +5,87 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/11/27 19:46:44 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/28 14:57:34 by hyowchoi         ###   ########.fr       */
+/*   Created: 2023/11/29 12:43:31 by hyowchoi          #+#    #+#             */
+/*   Updated: 2023/11/29 14:46:26 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	init_div(t_node **a, t_node **b, int cnt, int order)
+void	merge(t_node **a, t_node **b, int cnt[], int to_where)
+{
+	if (cnt[0] < 6)
+		return ;
+	cnt[0] /= 3;
+	cnt[1] *= 3;
+	if (to_where == TO_A)
+	{
+		merge(a, b, cnt, TO_B);
+		merge_to_a(a, b, cnt[1]);
+	}
+	else
+	{
+		merge(a, b, cnt, TO_A);
+		merge_to_b(a, b, cnt[1]);
+	}
+}
+
+void	merge_to_a(t_node **a, t_node **b, int div)
 {
 	int	i;
 
 	i = 0;
-	if (cnt < 6)
+	// move to a
+	while (1)
 	{
-		order_under_6(a, b, cnt, order);
-		return ;
+		if ((*b)->is_last == TRUE)
+		{
+			i++;
+			(*b)->is_last = FALSE;
+			if (i != 1)
+				(*a)->is_last = TRUE;
+		}
+		if (div < i)
+			break;
+		push_a(a, b);
 	}
-	if (order == ASC)
+	while (i > 0)
 	{
-		init_div(a, b, cnt / 3, ASC);
-		init_div(a, b, cnt / 3, DESC);
-		init_div(a, b, cnt - 2 * (cnt / 3), DESC);
-	}
-	else if (order == DESC)
-	{
-		init_div(a, b, cnt / 3, DESC);
-		init_div(a, b, cnt / 3, ASC);
-		init_div(a, b, cnt - 2 * (cnt / 3), ASC);
+		// check order
+		if ((*a)->val < (*a)->next->val) // asc
+			asc_to_a(a, b);
+		else // desc
+			desc_to_a(a, b);
+		i--;
 	}
 }
 
-void	order_under_6(t_node **a, t_node **b, int cnt, int order)
+void	merge_to_b(t_node **a, t_node **b, int div)
 {
-	if (order == ASC)
+	int	i;
+
+	i = 0;
+	// move to a
+	while (1)
 	{
-		if (cnt <= 2)
-			asc_12(a, b, cnt);
-		else if (cnt == 3)
-			asc_3(a, b);
-		else if (cnt == 4)
-			asc_4(a, b);
-		else if (cnt == 5)
-			asc_5(a, b);
+		if ((*a)->is_last == TRUE)
+		{
+			i++;
+			(*a)->is_last = FALSE;
+			if (i != 1)
+				(*b)->is_last = TRUE;
+		}
+		if (div < i)
+			break;
+		push_b(a, b);
 	}
-	else if (order == DESC)
+	while (i > 0)
 	{
-		if (cnt <= 2)
-			desc_12(a, b, cnt);
-		else if (cnt == 3)
-			desc_3(a, b);
-		else if (cnt == 4)
-			desc_4(a, b);
-		else if (cnt == 5)
-			desc_5(a, b);
+		// check order
+		if ((*b)->val < (*b)->next->val) // asc
+			asc_to_b(a, b);
+		else // desc
+			desc_to_b(a, b);
+		i--;
 	}
 }
