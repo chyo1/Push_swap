@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:19:41 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/29 18:20:47 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/29 18:27:58 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,18 +39,18 @@ int	main(int argc, char **argv)
 	merge(&head_a, &head_b, cnt, TO_A);
 }
 
-void	print_list(t_node **head)
-{
-	t_node	*now;
+// void	print_list(t_node **head)
+// {
+// 	t_node	*now;
 
-	now = *head;
-	if (*head == NULL)
-		return ;
-	while (now->next != *head)
-	{
-		printf("%d ", now->val);
-		now = now->next;
-	}
-	printf("%d ", now->val);
-	printf("\n");
-}
+// 	now = *head;
+// 	if (*head == NULL)
+// 		return ;
+// 	while (now->next != *head)
+// 	{
+// 		printf("%d ", now->val);
+// 		now = now->next;
+// 	}
+// 	printf("%d ", now->val);
+// 	printf("\n");
+// }

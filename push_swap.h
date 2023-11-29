@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:28 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/29 17:24:24 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/29 18:22:49 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 # include <unistd.h>
 # include <stdlib.h>
-# include <stdio.h>
+# include <stdio.h> //
 
 typedef struct s_node
 {

@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 14:52:32 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/29 18:19:18 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/29 18:25:18 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@ int	reverse_rotate_a(t_node **s1)
 	t_node	*node;
 
 	node = pop_back(s1);
-	// printf("ans : %d\n", node->val);
 	if (node == NULL)
 		return (0);
 	push_front(s1, node);

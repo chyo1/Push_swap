@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:43:31 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/29 14:46:26 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/29 18:32:07 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	merge_to_a(t_node **a, t_node **b, int div)
 			if (i != 1)
 				(*a)->is_last = TRUE;
 		}
-		if (div < i)
+		if (div / 3 < i)
 			break;
 		push_a(a, b);
 	}
@@ -75,7 +75,7 @@ void	merge_to_b(t_node **a, t_node **b, int div)
 			if (i != 1)
 				(*b)->is_last = TRUE;
 		}
-		if (div < i)
+		if (div / 3 < i)
 			break;
 		push_b(a, b);
 	}
