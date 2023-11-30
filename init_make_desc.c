@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:32:33 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/29 12:57:14 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/30 20:14:10 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,42 +14,45 @@
 
 void	desc_12(t_node **a, t_node **b, int cnt)
 {
-	t_node	*fir;
+	t_node	*start;
 	t_node	*sec;
 
 	if (cnt == 1)
 	{
 		push_b(a, b);
+		(*b)->start = TRUE;
+		(*b)->end = TRUE;
 		return ;
 	}
-	fir = *a;
+	start = *a;
 	sec = (*a)->next;
 	
-	if (sec->val < fir->val)
+	if (sec->val < start->val)
 		swap(*a, *b, 'a');
 	push_b(a, b);
+	(*b)->start = TRUE;
 	push_b(a, b);
-	(*b)->is_last = TRUE;
+	(*b)->end = TRUE;
 }
 
-void	desc_3(t_node **a, t_node **b)
+void	desc_3(t_node **a, t_node **b, int is_start)
 {
-	t_node	*fir;
+	t_node	*start;
 	t_node	*sec;
 	t_node	*thi;
 	int i;
 	int flag;
 
-	fir = *a;
-	sec = fir->next;
-	thi = fir->pre;
+	start = *a;
+	sec = start->next;
+	thi = start->pre;
 	i = -1;
 	// b a c / c a b / c b a --> a b c / a c b / b c a
-	if (sec->val < fir->val)
+	if (sec->val < start->val)
 		swap(*a, *b, 'a');
-	if (thi->val < fir->val && thi->val < sec->val)
+	if (thi->val < start->val && thi->val < sec->val)
 		flag = 0;
-	else if (fir->val < thi->val && sec->val < thi->val)
+	else if (start->val < thi->val && sec->val < thi->val)
 		flag = 2;
 	else
 		flag = 1;
@@ -58,18 +61,20 @@ void	desc_3(t_node **a, t_node **b)
 		if (i == flag)
 			reverse_rotate(a, b, 'a');
 		push_b(a, b);
+		if (is_start == TRUE && i == 0)
+			(*b)->start = TRUE;
 	}
-		(*b)->is_last = TRUE;
+	(*b)->end = TRUE;
 }
 
-void	desc_4(t_node **a, t_node **b)
+void	desc_4(t_node **a, t_node **b, int is_start)
 {
 	int	n[4];
 
-	n[0] = (*a)->val; // fir
+	n[0] = (*a)->val; // start
 	n[1] = ((*a)->next)->val; // sec
 	n[2] = (((*a)->next)->next)->val; // third
-	n[3] = ((*a)->pre)->val; // last
+	n[3] = ((*a)->pre)->val; // end
 	if (n[0] < n[1] && n[0] < n[2] && n[0] < n[3])
 		push_b(a, b);
 	else if (n[1] < n[0] && n[1] < n[2] && n[1] < n[3])
@@ -90,18 +95,20 @@ void	desc_4(t_node **a, t_node **b)
 		push_b(a, b);
 		rotate(a, b, 'a');
 	}
-	desc_3(a, b);
+	if (is_start == TRUE)
+		(*b)->start = TRUE;
+	desc_3(a, b, FALSE);
 }
 
 void	desc_5(t_node **a, t_node **b)
 {
 	int	n[5];
 
-	n[0] = (*a)->val; // fir
+	n[0] = (*a)->val; // start
 	n[1] = ((*a)->next)->val; // sec
 	n[2] = (((*a)->next)->next)->val; // third
-	n[3] = ((*a)->pre)->val; // last
-	n[4] = (((*a)->pre)->pre)->val; // pre-last
+	n[3] = ((*a)->pre)->val; // end
+	n[4] = (((*a)->pre)->pre)->val; // pre-end
 	if (n[0] < n[1] && n[0] < n[2] && n[0] < n[3] && n[0] < n[4])
 	{
 		push_b(a, b);
@@ -133,5 +140,6 @@ void	desc_5(t_node **a, t_node **b)
 		push_b(a, b);
 		rotate(a, b, 'a');
 	}
-	desc_4(a, b);
+	(*b)->start = TRUE;
+	desc_4(a, b, FALSE);
 }

@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:13 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/29 12:53:30 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/30 18:47:50 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,8 @@ int	make_node(t_node **head, int val)
 	if (new_node == NULL)
 		return (-1);
 	new_node->val = val;
-	new_node->is_last = FALSE;
+	new_node->start = FALSE;
+	new_node->end = FALSE;
 	if (*head == NULL)
 	{
 		push_back(head, new_node);

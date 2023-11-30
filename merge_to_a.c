@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:25:29 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/29 14:53:20 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/30 20:33:04 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,20 +15,25 @@
 void	asc_to_a(t_node **a, t_node **b)
 {
 	long long	num[3];
+	int			flag;
 
-	num[0] = (*a)->pre->val; // last_a
-	num[1] = (*b)->val; // first_b
-	num[2] = (*b)->pre->val; // last_b
-	while (1)
+	flag = 0;
+	del_flag((*a)->pre, *b, (*b)->pre, FIR);
+	while (*b)
 	{
-		if ((*a)->pre->is_last == TRUE)
+		num[0] = (*a)->pre->val; 	// end_a -> f
+		num[1] = (*b)->val; 		// fir_b -> f
+		num[2] = (*b)->pre->val; 	// end_b -> e
+		if ((*a)->pre->end == TRUE) // end_a -> end
 			num[0] = INT_MIN;
-		if ((*b)->is_last == TRUE)
+		if ((*b)->end == TRUE) // fir_b -> end
 			num[1] = INT_MIN;
-		if ((*b)->pre->is_last == TRUE)
+		if ((*b)->pre->start == TRUE) // end_b -> start
 			num[2] = INT_MIN;
-		if (num[0] == num[1] && num[1] == num[2])
+		del_flag((*a)->pre, *b, (*b)->pre, MID);
+		if (num[0] == num[1] && num[1] == num[2]){ // all node finished
 			break ;
+		}
 		if (num[1] < num[0] && num[2] < num[0])
 			reverse_rotate(a, b, 'a');
 		else if (num[0] < num[1] && num[2] < num[1])
@@ -38,79 +43,53 @@ void	asc_to_a(t_node **a, t_node **b)
 			reverse_rotate(a, b, 'b');
 			push_a(a, b);
 		}
+		if (!flag)
+		{
+			flag = 1;
+			(*a)->end = TRUE;
+		}
 	}
-	// check last val
-	num[0] = (*a)->pre->val; // last_a
-	num[1] = (*b)->val; // first_b
-	num[2] = (*b)->pre->val; // last_b
-	if (num[1] < num[0] && num[2] < num[0])
-	{	
+	while((*a)->pre->end != TRUE)
 		reverse_rotate(a, b, 'a');
-		if (num[1] < num[2]) // b c a
-		{
-			reverse_rotate(a, b, 'b');
-			push_a(a, b);
-			push_a(a, b);
-		}
-		else // c b a
-		{
-			push_a(a, b);
-			reverse_rotate(a, b, 'b');
-			push_a(a, b);
-		}
-	}
-	else if (num[0] < num[1] && num[2] < num[1])
+	(*a)->start = TRUE;
+}
+
+void	del_flag(t_node *end_a, t_node *fir_b, t_node *end_b, int flag)
+{
+	if (flag == FIR)
 	{
-		push_a(a, b);
-		if (num[0] < num[2]) // a c b
-		{
-			reverse_rotate(a, b, 'b');
-			push_a(a, b);
-			push_a(a, b);
-		}
-		else // c a b
-		{
-			reverse_rotate(a, b, 'a');
-			reverse_rotate(a, b, 'b');
-			push_a(a, b);
-		}
+		end_a->end = FALSE;
+		fir_b->end = FALSE;
+		end_b->start = FALSE;
 	}
-	else if (num[0] < num[2] && num[1] < num[2])
+	else if (flag == MID)
 	{
-		reverse_rotate(a, b, 'b');
-		push_a(a, b);
-		if (num[0] < num[1]) // a b c
-		{
-			push_a(a, b);
-			reverse_rotate(a, b, 'a');
-		}
-		else // b a c
-		{
-			reverse_rotate(a, b, 'a');
-			push_a(a, b);
-		}
+		if (end_a->end != TRUE)
+			end_a->start = FALSE;
+		if (fir_b->end != TRUE)
+			fir_b->start = FALSE;
+		if (end_b->start != TRUE)
+			end_b->end = FALSE;
 	}
-	(*a)->pre->is_last = FALSE;
-	(*b)->is_last = FALSE;
-	(*b)->pre->is_last = FALSE;
-	(*a)->is_last = TRUE;
 }
 
 void	desc_to_a(t_node **a, t_node **b)
 {
 	long long	num[3];
 
-	num[0] = (*a)->pre->val; // last_a
-	num[1] = (*b)->val; // first_b
-	num[2] = (*b)->pre->val; // last_b
+	num[0] = (*a)->pre->val; 	// end_a -> f
+	num[1] = (*b)->val; 		// start_b -> f
+	num[2] = (*b)->pre->val; 	// end_b -> e
+	del_flag((*a)->pre, *b, (*b)->pre, FIR);
 	while (1)
 	{
-		if ((*a)->pre->is_last == TRUE)
-			num[0] = INT_MAX;
-		if ((*b)->is_last == TRUE)
-			num[1] = INT_MAX;
-		if ((*b)->pre->is_last == TRUE)
-			num[2] = INT_MAX;
+		if ((*a)->pre->end == TRUE) // end_a -> end
+			num[0] = INT_MIN;
+		if ((*b)->end == TRUE) // startst_b -> end
+			num[1] = INT_MIN;
+		if ((*b)->pre->start == TRUE) // end_b -> start
+			num[2] = INT_MIN;
+		del_flag((*a)->pre, *b, (*b)->pre, MID);
 		if (num[0] == num[1] && num[1] == num[2])
 			break ;
 		if (num[0] < num[1] && num[0] < num[1])
@@ -123,58 +102,4 @@ void	desc_to_a(t_node **a, t_node **b)
 			push_a(a, b);
 		}
 	}
-	// check last val
-	num[0] = (*a)->pre->val; // last_a
-	num[1] = (*b)->val; // first_b
-	num[2] = (*b)->pre->val; // last_b
-	if (num[0] < num[1] && num[0] < num[2])
-	{	
-		reverse_rotate(a, b, 'a');
-		if (num[1] < num[2]) // a b c
-		{
-			push_a(a, b);
-			reverse_rotate(a, b, 'b');
-		}
-		else // a c b
-		{
-			reverse_rotate(a, b, 'b');
-			push_a(a, b);
-		}
-		push_a(a, b);
-	}
-	else if (num[1] < num[0] && num[1] < num[2])
-	{
-		push_a(a, b);
-		reverse_rotate(a, b, 'b');
-		if (num[0] < num[2]) // b a c
-		{
-			reverse_rotate(a, b, 'a');
-			push_a(a, b);
-		}
-		else // b c a
-		{
-			push_a(a, b);
-			reverse_rotate(a, b, 'a');
-		}
-	}
-	else if (num[2] < num[0] && num[2] < num[1])
-	{
-		reverse_rotate(a, b, 'b');
-		push_a(a, b);
-		if (num[0] < num[1]) // c a b
-		{
-			reverse_rotate(a, b, 'a');
-			push_a(a, b);
-		}
-		else // c b a
-		{
-			push_a(a, b);
-			reverse_rotate(a, b, 'a');
-		}
-	}
-	(*a)->pre->is_last = FALSE;
-	(*b)->is_last = FALSE;
-	(*b)->pre->is_last = FALSE;
-	
-	(*a)->is_last = TRUE;
 }

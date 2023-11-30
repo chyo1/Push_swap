@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:28 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/29 18:22:49 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/11/30 20:12:17 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,8 @@
 typedef struct s_node
 {
 	int				val;
-	int				is_last;
+	int				start;
+	int				end;
 	struct s_node	*pre;
 	struct s_node	*next;
 }	t_node;
@@ -28,11 +29,11 @@ typedef struct s_node
 # define ASC 0
 # define DESC 1
 
-# define TO_A 0
-# define TO_B 1
-
 # define FALSE 0
 # define TRUE 1
+
+# define FIR 0
+# define MID 1
 
 # define INT_MAX 2147483648
 # define INT_MIN -2147483649
@@ -75,15 +76,14 @@ int		reverse_rotate_b(t_node **s2);
 
 // init_make_asc.c
 void	asc_12(t_node **a, t_node **b, int cnt);
-void	asc_3(t_node **a, t_node **b);
-void	asc_4(t_node **a, t_node **b);
+void	asc_3(t_node **a, t_node **b, int is_start);
+void	asc_4(t_node **a, t_node **b, int is_start);
 void	asc_5(t_node **a, t_node **b);
 
 // init_make_desc.c
 void	desc_12(t_node **a, t_node **b, int cnt);
-void	desc_2(t_node **a, t_node **b);
-void	desc_3(t_node **a, t_node **b);
-void	desc_4(t_node **a, t_node **b);
+void	desc_3(t_node **a, t_node **b, int is_start);
+void	desc_4(t_node **a, t_node **b, int is_start);
 void	desc_5(t_node **a, t_node **b);
 
 // init_divide.c
@@ -92,13 +92,14 @@ int		check_order(t_node *head);
 void	order_under_6(t_node **a, t_node **b, int cnt, int order);
 
 // merge.c
-void	merge(t_node **a, t_node **b, int cnt[], int to_where);
+void	merge(t_node **a, t_node **b, int tri_size, int tri_cnt);
 void	merge_to_a(t_node **a, t_node **b, int div);
 void	merge_to_b(t_node **a, t_node **b, int div);
 
 // merge_to_a.c
 void	asc_to_a(t_node **a, t_node **b);
 void	desc_to_a(t_node **a, t_node **b);
+void	del_flag(t_node *last_a, t_node *first_b, t_node *last_b, int flag);
 
 // merge_to_b.c
 void	asc_to_b(t_node **a, t_node **b);
