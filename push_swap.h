@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:28 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/30 20:12:17 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/01 16:22:52 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@
 
 typedef struct s_node
 {
-	int				val;
+	long long		val;
 	int				start;
 	int				end;
 	struct s_node	*pre;
@@ -40,14 +40,14 @@ typedef struct s_node
 
 // main.c
 int		main(int argc, char **argv);
-void	print_list(t_node **head); //
+void	print_list(t_node *head); //
 // init_parsing.c
 void	check_space(const char **str);
 void	check_sign(const char **str, int *minus);
 int		parsing(const char *str, t_node **root, int *cnt);
 
 // init_connect_del.c
-int		make_node(t_node **head, int val);
+int		make_node(t_node **head, long long val);
 void	free_list(t_node **head);
 
 // push_pop.c
@@ -95,6 +95,7 @@ void	order_under_6(t_node **a, t_node **b, int cnt, int order);
 void	merge(t_node **a, t_node **b, int tri_size, int tri_cnt);
 void	merge_to_a(t_node **a, t_node **b, int div);
 void	merge_to_b(t_node **a, t_node **b, int div);
+void	reverse_list_flag(t_node *head);
 
 // merge_to_a.c
 void	asc_to_a(t_node **a, t_node **b);
@@ -104,5 +105,6 @@ void	del_flag(t_node *last_a, t_node *first_b, t_node *last_b, int flag);
 // merge_to_b.c
 void	asc_to_b(t_node **a, t_node **b);
 void	desc_to_b(t_node **a, t_node **b);
+void	del_flag(t_node *last_a, t_node *first_b, t_node *last_b, int flag);
 
 #endif

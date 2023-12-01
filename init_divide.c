@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:46:44 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/30 20:14:18 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/01 13:18:20 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,17 +24,17 @@ void	init_div(t_node **a, t_node **b, int cnt, int order)
 		order_under_6(a, b, cnt, order);
 		return ;
 	}
-	if (order == ASC)
+	if (order == ASC) // ㅇㅇㅈ
 	{
 		init_div(a, b, cnt / 3, ASC);
 		init_div(a, b, cnt / 3, DESC);
 		init_div(a, b, cnt - 2 * (cnt / 3), DESC);
 	}
-	else if (order == DESC)
+	else if (order == DESC) // ㅇㅈㅈ
 	{
-		init_div(a, b, cnt / 3, DESC);
 		init_div(a, b, cnt / 3, ASC);
-		init_div(a, b, cnt - 2 * (cnt / 3), ASC);
+		init_div(a, b, cnt / 3, ASC);
+		init_div(a, b, cnt - 2 * (cnt / 3), DESC);
 	}
 }
 int	check_order(t_node *head)

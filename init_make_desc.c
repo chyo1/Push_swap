@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:32:33 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/30 20:14:10 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/01 12:22:44 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ void	desc_3(t_node **a, t_node **b, int is_start)
 
 void	desc_4(t_node **a, t_node **b, int is_start)
 {
-	int	n[4];
+	long long	n[4];
 
 	n[0] = (*a)->val; // start
 	n[1] = ((*a)->next)->val; // sec
@@ -102,7 +102,7 @@ void	desc_4(t_node **a, t_node **b, int is_start)
 
 void	desc_5(t_node **a, t_node **b)
 {
-	int	n[5];
+	long long	n[5];
 
 	n[0] = (*a)->val; // start
 	n[1] = ((*a)->next)->val; // sec

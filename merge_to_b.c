@@ -1,179 +1,124 @@
-// /* ************************************************************************** */
-// /*                                                                            */
-// /*                                                        :::      ::::::::   */
-// /*   merge_to_b.c                                       :+:      :+:    :+:   */
-// /*                                                    +:+ +:+         +:+     */
-// /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
-// /*                                                +#+#+#+#+#+   +#+           */
-// /*   Created: 2023/11/29 14:25:41 by hyowchoi          #+#    #+#             */
-// /*   Updated: 2023/11/29 14:54:24 by hyowchoi         ###   ########.fr       */
-// /*                                                                            */
-// /* ************************************************************************** */
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   merge_to_b.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/11/29 14:25:29 by hyowchoi          #+#    #+#             */
+/*   Updated: 2023/12/01 16:11:53 by hyowchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-// #include "push_swap.h"
+#include "push_swap.h"
 
-// void	asc_to_b(t_node **a, t_node **b)
+void	asc_to_b(t_node **a, t_node **b)
+{
+	long long	num[3];
+	int			flag;
+	t_node		*last;
+
+	flag = 0;
+	del_flag((*b)->pre, *a, (*a)->pre, FIR);
+	while (*a)
+	{
+		num[0] = (*b)->pre->val; 	// end_b -> f
+		num[1] = (*a)->val; 		// fir_a -> f
+		num[2] = (*a)->pre->val; 	// end_a -> e
+		if ((*b)->pre->end == TRUE) // end_b -> end
+			num[0] = INT_MIN;
+		if ((*a)->end == TRUE) // fir_a -> end
+			num[1] = INT_MIN;
+		if ((*a)->pre->start == TRUE) // end_a -> start
+			num[2] = INT_MIN;
+		del_flag((*b)->pre, *a, (*a)->pre, MID);
+		if (num[0] == num[1] && num[1] == num[2]) // all node finished
+			break ;
+		if (num[1] < num[0] && num[2] < num[0])
+			reverse_rotate(a, b, 'b');
+		else if (num[0] < num[1] && num[2] < num[1])
+			push_b(a, b);
+		else
+		{
+			reverse_rotate(a, b, 'a');
+			push_b(a, b);
+		}
+		if (!flag)
+		{
+			flag = 1;
+			(*b)->end = TRUE;
+			last = *b;
+		}
+	}
+	while((*b)->pre->end != TRUE)
+		reverse_rotate(a, b, 'b');
+	(*b)->start = TRUE;
+	// (*a)->end = TRUE;
+	// last->end = FALSE;
+	// last->start = TRUE;
+}
+
+// void	del_flag(t_node *end_b, t_node *fir_a, t_node *end_a, int flag)
 // {
-// 	long long	num[3];
-
-// 	num[0] = (*b)->pre->val; // last_b
-// 	num[1] = (*a)->val; // first_a
-// 	num[2] = (*a)->pre->val; // last_a
-// 	while (1)
+// 	if (flag == FIR)
 // 	{
-// 		if ((*b)->pre->is_last == TRUE)
-// 			num[0] = INT_MIN;
-// 		if ((*a)->is_last == TRUE)
-// 			num[1] = INT_MIN;
-// 		if ((*a)->pre->is_last == TRUE)
-// 			num[2] = INT_MIN;
-// 		if (num[0] == num[1] && num[1] == num[2])
-// 			break ;
-// 		if (num[1] < num[0] && num[2] < num[0])
-// 			reverse_rotate(a, b, 'b');
-// 		else if (num[0] < num[1] && num[2] < num[1])
-// 			push_b(a, b);
-// 		else
-// 		{
-// 			reverse_rotate(a, b, 'a');
-// 			push_b(a, b);
-// 		}
+// 		end_b->end = FALSE;
+// 		fir_a->end = FALSE;
+// 		end_a->start = FALSE;
 // 	}
-// 	// check last val
-// 	num[0] = (*b)->pre->val; // last_b
-// 	num[1] = (*a)->val; // first_a
-// 	num[2] = (*a)->pre->val; // last_a
-// 	if (num[1] < num[0] && num[2] < num[0])
-// 	{	
-// 		reverse_rotate(a, b, 'b');
-// 		if (num[1] < num[2]) // b c a
-// 		{
-// 			reverse_rotate(a, b, 'a');
-// 			push_b(a, b);
-// 			push_b(a, b);
-// 		}
-// 		else // c b a
-// 		{
-// 			push_b(a, b);
-// 			reverse_rotate(a, b, 'a');
-// 			push_b(a, b);
-// 		}
-// 	}
-// 	else if (num[0] < num[1] && num[2] < num[1])
+// 	else if (flag == MID)
 // 	{
-// 		push_b(a, b);
-// 		if (num[0] < num[2]) // a c b
-// 		{
-// 			reverse_rotate(a, b, 'a');
-// 			push_b(a, b);
-// 			push_b(a, b);
-// 		}
-// 		else // c a b
-// 		{
-// 			reverse_rotate(a, b, 'b');
-// 			reverse_rotate(a, b, 'a');
-// 			push_b(a, b);
-// 		}
+// 		if (end_b->end != TRUE)
+// 			end_b->start = FALSE;
+// 		if (fir_a->end != TRUE)
+// 			fir_a->start = FALSE;
+// 		if (end_a->start != TRUE)
+// 			end_a->end = FALSE;
 // 	}
-// 	else if (num[0] < num[2] && num[1] < num[2])
-// 	{
-// 		reverse_rotate(a, b, 'a');
-// 		push_b(a, b);
-// 		if (num[0] < num[1]) // a b c
-// 		{
-// 			push_b(a, b);
-// 			reverse_rotate(a, b, 'b');
-// 		}
-// 		else // b a c
-// 		{
-// 			reverse_rotate(a, b, 'b');
-// 			push_b(a, b);
-// 		}
-// 	}
-// 	(*b)->pre->is_last = FALSE;
-// 	(*a)->is_last = FALSE;
-// 	(*a)->pre->is_last = FALSE;
-// 	(*b)->is_last = TRUE;
 // }
 
-// void	desc_to_b(t_node **a, t_node **b)
-// {
-// 	long long	num[3];
+void	desc_to_b(t_node **a, t_node **b)
+{
+	long long	num[3];
+	int			flag;
+	t_node		*last;
 
-// 	num[0] = (*b)->pre->val; // last_b
-// 	num[1] = (*a)->val; // first_a
-// 	num[2] = (*a)->pre->val; // last_a
-// 	while (1)
-// 	{
-// 		if ((*b)->pre->is_last == TRUE)
-// 			num[0] = INT_MAX;
-// 		if ((*a)->is_last == TRUE)
-// 			num[1] = INT_MAX;
-// 		if ((*a)->pre->is_last == TRUE)
-// 			num[2] = INT_MAX;
-// 		if (num[0] == num[1] && num[1] == num[2])
-// 			break ;
-// 		if (num[0] < num[1] && num[0] < num[1])
-// 			reverse_rotate(a, b, 'b');
-// 		else if (num[1] < num[0] && num[1] < num[2])
-// 			push_b(a, b);
-// 		else
-// 		{
-// 			reverse_rotate(a, b, 'a');
-// 			push_b(a, b);
-// 		}
-// 	}
-// 	// check last val
-// 	num[0] = (*b)->pre->val; // last_b
-// 	num[1] = (*a)->val; // first_a
-// 	num[2] = (*a)->pre->val; // last_a
-// 	if (num[0] < num[1] && num[0] < num[2])
-// 	{	
-// 		reverse_rotate(a, b, 'b');
-// 		if (num[1] < num[2]) // a b c
-// 		{
-// 			push_b(a, b);
-// 			reverse_rotate(a, b, 'a');
-// 		}
-// 		else // a c b
-// 		{
-// 			reverse_rotate(a, b, 'a');
-// 			push_b(a, b);
-// 		}
-// 		push_b(a, b);
-// 	}
-// 	else if (num[1] < num[0] && num[1] < num[2])
-// 	{
-// 		push_b(a, b);
-// 		reverse_rotate(a, b, 'a');
-// 		if (num[0] < num[2]) // b a c
-// 		{
-// 			reverse_rotate(a, b, 'b');
-// 			push_b(a, b);
-// 		}
-// 		else // b c a
-// 		{
-// 			push_b(a, b);
-// 			reverse_rotate(a, b, 'b');
-// 		}
-// 	}
-// 	else if (num[2] < num[0] && num[2] < num[1])
-// 	{
-// 		reverse_rotate(a, b, 'a');
-// 		push_b(a, b);
-// 		if (num[0] < num[1]) // c a b
-// 		{
-// 			reverse_rotate(a, b, 'b');
-// 			push_b(a, b);
-// 		}
-// 		else // c b a
-// 		{
-// 			push_b(a, b);
-// 			reverse_rotate(a, b, 'b');
-// 		}
-// 	}
-// 	(*b)->pre->is_last = FALSE;
-// 	(*a)->is_last = FALSE;
-// 	(*a)->pre->is_last = FALSE;
-// 	(*b)->is_last = TRUE;
-// }
+	flag = 0;
+	del_flag((*b)->pre, *a, (*a)->pre, FIR);
+	while (*a)
+	{
+		num[0] = (*b)->pre->val; 	// end_b -> f
+		num[1] = (*a)->val; 		// fir_a -> f
+		num[2] = (*a)->pre->val; 	// end_a -> e
+		if ((*b)->pre->end == TRUE) // end_b -> end
+			num[0] = INT_MAX;
+		if ((*a)->end == TRUE) // fir_a -> end
+			num[1] = INT_MAX;
+		if ((*a)->pre->start == TRUE) // end_a -> start
+			num[2] = INT_MAX;
+		del_flag((*b)->pre, *a, (*a)->pre, MID);
+		if (num[0] == num[1] && num[1] == num[2])
+			break ;
+		if (num[0] < num[1] && num[0] < num[1])
+			reverse_rotate(a, b, 'b');
+		else if (num[1] < num[0] && num[1] < num[2])
+			push_b(a, b);
+		else
+		{
+			reverse_rotate(a, b, 'a');
+			push_b(a, b);
+		}
+		if (!flag)
+		{
+			flag = 1;
+			(*b)->end = TRUE;
+			last = *b;
+		}
+	}
+	while((*b)->pre->end != TRUE)
+		reverse_rotate(a, b, 'b');
+	(*b)->start = TRUE;
+	// (*a)->end = TRUE;
+	// last->end = FALSE;
+	// last->start = TRUE;
+}

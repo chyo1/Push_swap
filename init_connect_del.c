@@ -6,13 +6,13 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:13 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/30 18:47:50 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/01 12:09:46 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-int	make_node(t_node **head, int val)
+int	make_node(t_node **head, long long val)
 {
 	t_node	*new_node;
 	t_node	*last;

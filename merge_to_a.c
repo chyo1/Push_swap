@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:25:29 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/30 20:33:04 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/01 16:20:59 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@ void	asc_to_a(t_node **a, t_node **b)
 {
 	long long	num[3];
 	int			flag;
+	t_node		*last;
 
 	flag = 0;
 	del_flag((*a)->pre, *b, (*b)->pre, FIR);
@@ -31,9 +32,8 @@ void	asc_to_a(t_node **a, t_node **b)
 		if ((*b)->pre->start == TRUE) // end_b -> start
 			num[2] = INT_MIN;
 		del_flag((*a)->pre, *b, (*b)->pre, MID);
-		if (num[0] == num[1] && num[1] == num[2]){ // all node finished
+		if (num[0] == num[1] && num[1] == num[2]) // all node finished
 			break ;
-		}
 		if (num[1] < num[0] && num[2] < num[0])
 			reverse_rotate(a, b, 'a');
 		else if (num[0] < num[1] && num[2] < num[1])
@@ -47,11 +47,15 @@ void	asc_to_a(t_node **a, t_node **b)
 		{
 			flag = 1;
 			(*a)->end = TRUE;
+			last = *a;
 		}
 	}
 	while((*a)->pre->end != TRUE)
 		reverse_rotate(a, b, 'a');
 	(*a)->start = TRUE;
+	// (*a)->end = TRUE;
+	// last->end = FALSE;
+	// last->start = TRUE;
 }
 
 void	del_flag(t_node *end_a, t_node *fir_b, t_node *end_b, int flag)
@@ -76,23 +80,26 @@ void	del_flag(t_node *end_a, t_node *fir_b, t_node *end_b, int flag)
 void	desc_to_a(t_node **a, t_node **b)
 {
 	long long	num[3];
+	int			flag;
+	t_node		*last;
 
-	num[0] = (*a)->pre->val; 	// end_a -> f
-	num[1] = (*b)->val; 		// start_b -> f
-	num[2] = (*b)->pre->val; 	// end_b -> e
+	flag = 0;
 	del_flag((*a)->pre, *b, (*b)->pre, FIR);
-	while (1)
+	while (*b)
 	{
+		num[0] = (*a)->pre->val; 	// end_a -> f
+		num[1] = (*b)->val; 		// fir_b -> f
+		num[2] = (*b)->pre->val; 	// end_b -> e
 		if ((*a)->pre->end == TRUE) // end_a -> end
-			num[0] = INT_MIN;
-		if ((*b)->end == TRUE) // startst_b -> end
-			num[1] = INT_MIN;
+			num[0] = INT_MAX;
+		if ((*b)->end == TRUE) // fir_b -> end
+			num[1] = INT_MAX;
 		if ((*b)->pre->start == TRUE) // end_b -> start
-			num[2] = INT_MIN;
+			num[2] = INT_MAX;
 		del_flag((*a)->pre, *b, (*b)->pre, MID);
 		if (num[0] == num[1] && num[1] == num[2])
 			break ;
-		if (num[0] < num[1] && num[0] < num[1])
+		if (num[0] < num[1] && num[0] < num[2])
 			reverse_rotate(a, b, 'a');
 		else if (num[1] < num[0] && num[1] < num[2])
 			push_a(a, b);
@@ -101,5 +108,18 @@ void	desc_to_a(t_node **a, t_node **b)
 			reverse_rotate(a, b, 'b');
 			push_a(a, b);
 		}
+		if (!flag)
+		{
+			flag = 1;
+			(*a)->end = TRUE;
+			last = *a;
+		}
 	}
+	while((*a)->pre->end != TRUE)
+		reverse_rotate(a, b, 'a');
+	(*a)->start = TRUE;
+	// (*a)->end = TRUE;
+	// last->end = FALSE;
+	// last->start = TRUE;
+	
 }
