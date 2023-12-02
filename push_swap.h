@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:28 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/01 16:22:52 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/02 20:16:02 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_node
 // main.c
 int		main(int argc, char **argv);
 void	print_list(t_node *head); //
+
 // init_parsing.c
 void	check_space(const char **str);
 void	check_sign(const char **str, int *minus);
@@ -90,6 +91,8 @@ void	desc_5(t_node **a, t_node **b);
 void	init_div(t_node **a, t_node **b, int cnt, int order);
 int		check_order(t_node *head);
 void	order_under_6(t_node **a, t_node **b, int cnt, int order);
+void	order_excep(t_node **a, t_node **b, int order, int which);
+void	exep_merge_to_b(t_node **a, t_node **b, int order, int which);
 
 // merge.c
 void	merge(t_node **a, t_node **b, int tri_size, int tri_cnt);
@@ -99,12 +102,23 @@ void	reverse_list_flag(t_node *head);
 
 // merge_to_a.c
 void	asc_to_a(t_node **a, t_node **b);
-void	desc_to_a(t_node **a, t_node **b);
-void	del_flag(t_node *last_a, t_node *first_b, t_node *last_b, int flag);
+void	desc_to_a(t_node **a, t_node **b); //
+void	del_flag_a(t_node *end_a, t_node *fir_b, t_node *end_b, int flag);
 
 // merge_to_b.c
 void	asc_to_b(t_node **a, t_node **b);
 void	desc_to_b(t_node **a, t_node **b);
-void	del_flag(t_node *last_a, t_node *first_b, t_node *last_b, int flag);
+void	del_flag_b(t_node *end_b, t_node *fir_a, t_node *end_a, int flag);
 
+// exep_asc_merge_to_b.c
+void	asc_to_b_16(t_node **a, t_node **b);
+void	asc_to_b_17(t_node **a, t_node **b);
+void	del_flag_b_16(t_node *end_b, t_node *fir_a, int flag);
+void	del_flag_b_17(t_node *end_b, t_node *fir_a, int flag);
+
+// exep_desc_merge_to_b.c
+void	desc_to_b_16(t_node **a, t_node **b);
+void	desc_to_b_17(t_node **a, t_node **b);
+// void	del_flag_b_16(t_node *end_b, t_node *fir_a, int flag);
+// void	del_flag_b_17(t_node *end_b, t_node *fir_a, int flag);
 #endif

@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:13 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/01 12:09:46 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/02 11:51:44 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ int	make_node(t_node **head, long long val)
 	}
 	while (last != NULL)
 	{
-		if (last->val == val)
+		if (last->val > INT_MIN && last->val == val)
 		{
 			free(new_node);
 			return (-1); // num duplicated

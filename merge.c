@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:43:31 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/01 18:07:06 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/02 20:12:45 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ void	merge_to_a(t_node **a, t_node **b, int tri_cnt)
 	{
 		// check order
 		if ((*a)->pre->pre->val < (*a)->pre->val) // asc
+	//	if ((*a)->order == ASC)
 			asc_to_a(a, b);
 		else // desc
 			desc_to_a(a, b);
@@ -104,5 +105,5 @@ void	reverse_list_flag(t_node *head)
 	{
 		now->end = FALSE;
 		now->start = TRUE;
-		}
+	}
 }

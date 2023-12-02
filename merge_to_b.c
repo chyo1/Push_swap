@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:25:29 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/01 16:11:53 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/02 20:15:07 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ void	asc_to_b(t_node **a, t_node **b)
 	t_node		*last;
 
 	flag = 0;
-	del_flag((*b)->pre, *a, (*a)->pre, FIR);
+	del_flag_b((*b)->pre, *a, (*a)->pre, FIR);
 	while (*a)
 	{
 		num[0] = (*b)->pre->val; 	// end_b -> f
@@ -31,7 +31,7 @@ void	asc_to_b(t_node **a, t_node **b)
 			num[1] = INT_MIN;
 		if ((*a)->pre->start == TRUE) // end_a -> start
 			num[2] = INT_MIN;
-		del_flag((*b)->pre, *a, (*a)->pre, MID);
+		del_flag_b((*b)->pre, *a, (*a)->pre, MID);
 		if (num[0] == num[1] && num[1] == num[2]) // all node finished
 			break ;
 		if (num[1] < num[0] && num[2] < num[0])
@@ -53,29 +53,26 @@ void	asc_to_b(t_node **a, t_node **b)
 	while((*b)->pre->end != TRUE)
 		reverse_rotate(a, b, 'b');
 	(*b)->start = TRUE;
-	// (*a)->end = TRUE;
-	// last->end = FALSE;
-	// last->start = TRUE;
 }
 
-// void	del_flag(t_node *end_b, t_node *fir_a, t_node *end_a, int flag)
-// {
-// 	if (flag == FIR)
-// 	{
-// 		end_b->end = FALSE;
-// 		fir_a->end = FALSE;
-// 		end_a->start = FALSE;
-// 	}
-// 	else if (flag == MID)
-// 	{
-// 		if (end_b->end != TRUE)
-// 			end_b->start = FALSE;
-// 		if (fir_a->end != TRUE)
-// 			fir_a->start = FALSE;
-// 		if (end_a->start != TRUE)
-// 			end_a->end = FALSE;
-// 	}
-// }
+void	del_flag_b(t_node *end_b, t_node *fir_a, t_node *end_a, int flag)
+{
+	if (flag == FIR)
+	{
+		end_b->end = FALSE;
+		fir_a->end = FALSE;
+		end_a->start = FALSE;
+	}
+	else if (flag == MID)
+	{
+		if (end_b->end != TRUE)
+			end_b->start = FALSE;
+		if (fir_a->end != TRUE)
+			fir_a->start = FALSE;
+		if (end_a->start != TRUE)
+			end_a->end = FALSE;
+	}
+}
 
 void	desc_to_b(t_node **a, t_node **b)
 {
@@ -84,7 +81,7 @@ void	desc_to_b(t_node **a, t_node **b)
 	t_node		*last;
 
 	flag = 0;
-	del_flag((*b)->pre, *a, (*a)->pre, FIR);
+	del_flag_b((*b)->pre, *a, (*a)->pre, FIR);
 	while (*a)
 	{
 		num[0] = (*b)->pre->val; 	// end_b -> f
@@ -96,7 +93,7 @@ void	desc_to_b(t_node **a, t_node **b)
 			num[1] = INT_MAX;
 		if ((*a)->pre->start == TRUE) // end_a -> start
 			num[2] = INT_MAX;
-		del_flag((*b)->pre, *a, (*a)->pre, MID);
+		del_flag_b((*b)->pre, *a, (*a)->pre, MID);
 		if (num[0] == num[1] && num[1] == num[2])
 			break ;
 		if (num[0] < num[1] && num[0] < num[1])

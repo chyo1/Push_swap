@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:49 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/29 16:46:28 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/02 11:46:38 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,9 +24,9 @@ void	swap(t_node *a, t_node *b, char which)
 
 int	swap_a(t_node *a)
 {
-	t_node	*fir;
-	t_node	*sec;
-	int		tmp;
+	t_node		*fir;
+	t_node		*sec;
+	long long	tmp;
 
 	if (a == NULL || a->next == NULL)
 		return (0);
@@ -40,9 +40,9 @@ int	swap_a(t_node *a)
 
 int	swap_b(t_node *b)
 {
-	t_node	*fir;
-	t_node	*sec;
-	int		tmp;
+	t_node		*fir;
+	t_node		*sec;
+	long long	tmp;
 
 	if (b == NULL || b->next == NULL)
 		return (0);

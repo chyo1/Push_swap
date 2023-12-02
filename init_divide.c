@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:46:44 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/01 13:18:20 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/02 20:10:13 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,29 +14,49 @@
 
 void	init_div(t_node **a, t_node **b, int cnt, int order)
 {
-	int	i;
-
 	// if (check_order(*a))
 	// 	return ;
-	i = 0;
+	if (cnt == 14)
+	{
+		order_under_6(a, b, 4, ASC);
+		if (order == ASC) // ㅇㅇㅈ
+			order_under_6(a, b, 5, DESC);
+		else if (order == DESC) // ㅇㅈㅈ
+			order_under_6(a, b, 5, ASC);
+		order_under_6(a, b, 5, DESC);
+		return ;
+	}
+	else if (cnt == 16)
+	{
+		init_div(a, b, 5, ASC);
+		if (order == ASC) // ㅇㅇㅈ
+			init_div(a, b, 5, DESC);
+		else if (order == DESC) // ㅇㅈㅈ
+			init_div(a, b, 5, ASC);
+		return (order_excep(a, b, DESC, 16));
+	}
+	else if (cnt == 17)
+	{
+		init_div(a, b, 5, ASC);
+		if (order == ASC) // ㅇㅇㅈ
+			order_excep(a, b, DESC, 17);
+		else if (order == DESC) // ㅇㅈㅈ
+			order_excep(a, b, ASC, 17);
+		return (order_excep(a, b, DESC, 16));
+	}
 	if (cnt < 6)
 	{
 		order_under_6(a, b, cnt, order);
 		return ;
 	}
+	init_div(a, b, cnt / 3, ASC);
 	if (order == ASC) // ㅇㅇㅈ
-	{
-		init_div(a, b, cnt / 3, ASC);
 		init_div(a, b, cnt / 3, DESC);
-		init_div(a, b, cnt - 2 * (cnt / 3), DESC);
-	}
 	else if (order == DESC) // ㅇㅈㅈ
-	{
 		init_div(a, b, cnt / 3, ASC);
-		init_div(a, b, cnt / 3, ASC);
-		init_div(a, b, cnt - 2 * (cnt / 3), DESC);
-	}
+	return (init_div(a, b, cnt - 2 * (cnt / 3), DESC));
 }
+
 int	check_order(t_node *head)
 {
 	t_node	*now;
@@ -74,4 +94,89 @@ void	order_under_6(t_node **a, t_node **b, int cnt, int order)
 		else if (cnt == 5)
 			desc_5(a, b);
 	}
+}
+void	order_excep(t_node **a, t_node **b, int order, int which)
+{
+	if (order == ASC) // ㅈㅈㅇ
+	{
+		order_under_6(a, b, 2, ASC); // 1 bottom_a  ASC
+		order_under_6(a, b, 2, ASC); //  2 top_a     DESC
+		order_under_6(a, b, 2, ASC); //  3 bottom_b  ASC
+		exep_merge_to_b(a, b, ASC, which);
+	}
+	else // ㅇㅇㅈ
+	{
+		order_under_6(a, b, 2, DESC); // bottom_a  DESC
+		order_under_6(a, b, 2, DESC); //  top_a    ASC
+		order_under_6(a, b, 2, DESC); //  bottom_b DESC
+		exep_merge_to_b(a, b, DESC, which);
+	}
+}
+void	exep_merge_to_b(t_node **a, t_node **b, int order, int which)
+{
+	int	i;
+
+	i = 0;
+	while (i < 6)
+	{
+		(*b)->start = FALSE;
+		(*b)->end = FALSE;
+		// start = true
+		if (i == 0 || i == 2 || i == 5)
+			(*b)->start = TRUE;
+		// end = true
+		else if (i == 1 || i == 3 || i == 4)
+			(*b)->end = TRUE;
+
+		// bottom_b
+		if (i < 2)
+			rotate(a, b, 'b');
+		// top_a
+		else if (i < 4)
+			push_a(a, b);
+		// bottom_a
+		else
+		{
+			push_a(a, b);
+			rotate(a, b, 'a');
+		}
+		i++;
+	}
+	printf("\n--------------exep-----------\n");
+	print_list(*a);
+	print_list(*b);
+	// asc
+	if (order == ASC)
+	{
+		if (which == 16)
+			asc_to_b_16(a, b); //
+		else 
+			asc_to_b_17(a, b);
+	}
+	// desc
+	else
+	{
+		if (which == 16)
+			desc_to_b_16(a, b); //
+		else 
+			desc_to_b_17(a, b);
+	}
+
+	printf("\n-------------check_flag-----------\n");
+	print_list(*a);
+	print_list(*b);
+
+	// reverse flag
+	t_node *last = *b;
+	while (last->end != TRUE)
+		last = last->next;
+	last->end = FALSE;
+	last->start = TRUE;
+	(*b)->start = FALSE;
+	(*b)->end = TRUE;
+
+	printf("\n--------------reverse flag-----------\n");
+	print_list(*a);
+	print_list(*b);
+	
 }
