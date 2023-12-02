@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:28 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/02 20:16:02 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/02 21:36:41 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,14 +111,10 @@ void	desc_to_b(t_node **a, t_node **b);
 void	del_flag_b(t_node *end_b, t_node *fir_a, t_node *end_a, int flag);
 
 // exep_asc_merge_to_b.c
-void	asc_to_b_16(t_node **a, t_node **b);
-void	asc_to_b_17(t_node **a, t_node **b);
-void	del_flag_b_16(t_node *end_b, t_node *fir_a, int flag);
-void	del_flag_b_17(t_node *end_b, t_node *fir_a, int flag);
+void	exep_asc_to_b(t_node **a, t_node **b, int which);
+// void	del_flag_b(t_node *end_b, t_node *fir_a, int flag, int which);
 
 // exep_desc_merge_to_b.c
-void	desc_to_b_16(t_node **a, t_node **b);
-void	desc_to_b_17(t_node **a, t_node **b);
-// void	del_flag_b_16(t_node *end_b, t_node *fir_a, int flag);
-// void	del_flag_b_17(t_node *end_b, t_node *fir_a, int flag);
+void	exep_desc_to_b(t_node **a, t_node **b, int which);
+void	del_flag_exep(t_node *end_b, t_node *fir_a, int flag, int which);
 #endif

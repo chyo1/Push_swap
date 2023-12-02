@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:46:44 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/02 20:10:13 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/02 22:19:37 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,29 +142,19 @@ void	exep_merge_to_b(t_node **a, t_node **b, int order, int which)
 		}
 		i++;
 	}
-	printf("\n--------------exep-----------\n");
-	print_list(*a);
-	print_list(*b);
+	// printf("\n--------------exep-----------\n");
+	// print_list(*a);
+	// print_list(*b);
 	// asc
 	if (order == ASC)
-	{
-		if (which == 16)
-			asc_to_b_16(a, b); //
-		else 
-			asc_to_b_17(a, b);
-	}
+		exep_asc_to_b(a, b, which);
 	// desc
 	else
-	{
-		if (which == 16)
-			desc_to_b_16(a, b); //
-		else 
-			desc_to_b_17(a, b);
-	}
+		exep_desc_to_b(a, b, which);
 
-	printf("\n-------------check_flag-----------\n");
-	print_list(*a);
-	print_list(*b);
+	// printf("\n-------------check_flag-----------\n");
+	// print_list(*a);
+	// print_list(*b);
 
 	// reverse flag
 	t_node *last = *b;
@@ -175,8 +165,7 @@ void	exep_merge_to_b(t_node **a, t_node **b, int order, int which)
 	(*b)->start = FALSE;
 	(*b)->end = TRUE;
 
-	printf("\n--------------reverse flag-----------\n");
-	print_list(*a);
-	print_list(*b);
-	
+	// printf("\n--------------reverse flag-----------\n");
+	// print_list(*a);
+	// print_list(*b);
 }
