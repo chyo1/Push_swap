@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:19:41 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/02 22:49:03 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/05 14:19:12 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,10 +35,10 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	init_div(&head_a, &head_b, cnt, ASC);
-	printf("\n cnt : %d\n", cnt);
-	printf("\n----init divide to b----\n");
-	print_list(head_b);
-	// printf("\n------------merge-------------\n");
+	// printf("\n cnt : %d\n", cnt);
+	// printf("\n----init divide to b----\n");
+	// print_list(head_b);
+	// // printf("\n------------merge-------------\n");
 	merge(&head_a, &head_b, cnt, 1);
 	// print_list(head_b);
 	if (head_a == NULL)
@@ -60,14 +60,35 @@ void	print_list(t_node *head)
 	now = head;
 	if (head == NULL)
 		return ;
-	printf("\n----print_list----\n");
+	//printf("\n----print_list----\n");
 	while (now->next != head)
 	{
 		printf("s: %d e: %d val: %lld\n", now->start, now->end, now->val);
 		if (now->start == TRUE)
-			printf("\n-----------div line-----------\n");
+			printf("-----------------\n");
 		now = now->next;
 	}
 	printf("s: %d e: %d val: %lld\n", now->start, now->end, now->val);
+	printf("\n-----------------------------\n");
+	printf("\n");
+}
+
+void	print_rev_list(t_node *head)
+{
+	t_node	*now;
+
+	now = head;
+	if (head == NULL)
+		return ;
+	//printf("\n----print_list----\n");
+	while (now->next != head)
+	{
+		printf("s: %d e: %d val: %lld\n", now->start, now->end, now->val);
+		if (now->end == TRUE)
+			printf("-----------------\n");
+		now = now->next;
+	}
+	printf("s: %d e: %d val: %lld\n", now->start, now->end, now->val);
+	printf("-----------------------------");
 	printf("\n");
 }

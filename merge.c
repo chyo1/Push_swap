@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:43:31 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/02 22:42:15 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/05 14:22:04 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,23 +35,24 @@ void	merge_to_a(t_node **a, t_node **b, int tri_cnt)
 			cnt++;
 		push_a(a, b);
 	}
-	printf("\n---\n");
-	print_list(*a);
-	print_list(*b);
+	// printf("\n--------merge_to_a, div_to_b--------\n");
+	// printf("\n        a\n");
+	// print_rev_list(*a);
+	// printf("\n        b\n");
+	// print_list(*b);
 	while (cnt > 0)
 	{
 		// check order
 		if ((*a)->pre->pre->val < (*a)->pre->val) // asc
-	//	if ((*a)->order == ASC)
 			asc_to_a(a, b);
 		else // desc
 			desc_to_a(a, b);
 		cnt--;
-	}
-
+	} 
 	reverse_list_flag(*a);
-	// printf("reverse\n");
+	// printf("\n--------merge_to_a--------\n");
 	// print_list(*a);
+	// // print_list(*b);
 }
 
 void	merge_to_b(t_node **a, t_node **b, int tri_cnt)
@@ -66,6 +67,11 @@ void	merge_to_b(t_node **a, t_node **b, int tri_cnt)
 			cnt++;
 		push_b(a, b);
 	}
+	// printf("\n--------merge_to_b, div_to_a--------\n");
+	// printf("\n          a\n");
+	// print_list(*a);
+	// printf("\n          b\n");
+	// print_rev_list(*b);
 	while (cnt > 0)
 	{
 		// check order
@@ -76,6 +82,9 @@ void	merge_to_b(t_node **a, t_node **b, int tri_cnt)
 		cnt--;
 	}
 	reverse_list_flag(*b);
+	// printf("--------merge_to_b--------\n");
+	// // print_list(*a);
+	// print_list(*b);
 }
 
 void	reverse_list_flag(t_node *head)

@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:25:29 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/02 22:01:32 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/05 14:18:26 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	asc_to_b(t_node **a, t_node **b)
 {
 	long long	num[3];
 	int			flag;
-	t_node		*last;
 
 	flag = 0;
 	del_flag_b((*b)->pre, *a, (*a)->pre, FIR);
@@ -47,7 +46,6 @@ void	asc_to_b(t_node **a, t_node **b)
 		{
 			flag = 1;
 			(*b)->end = TRUE;
-			last = *b;
 		}
 	}
 	while((*b)->pre->end != TRUE)
@@ -78,7 +76,6 @@ void	desc_to_b(t_node **a, t_node **b)
 {
 	long long	num[3];
 	int			flag;
-	t_node		*last;
 
 	flag = 0;
 	del_flag_b((*b)->pre, *a, (*a)->pre, FIR);
@@ -96,7 +93,7 @@ void	desc_to_b(t_node **a, t_node **b)
 		del_flag_b((*b)->pre, *a, (*a)->pre, MID);
 		if (num[0] == INT_MAX && num[1] == INT_MAX && num[2] == INT_MAX)
 			break ;
-		if (num[0] < num[1] && num[0] < num[1])
+		if (num[0] < num[1] && num[0] < num[2])
 			reverse_rotate(a, b, 'b');
 		else if (num[1] < num[0] && num[1] < num[2])
 			push_b(a, b);
@@ -109,13 +106,9 @@ void	desc_to_b(t_node **a, t_node **b)
 		{
 			flag = 1;
 			(*b)->end = TRUE;
-			last = *b;
 		}
 	}
 	while((*b)->pre->end != TRUE)
 		reverse_rotate(a, b, 'b');
 	(*b)->start = TRUE;
-	// (*a)->end = TRUE;
-	// last->end = FALSE;
-	// last->start = TRUE;
 }

@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:28 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/02 21:36:41 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/05 13:20:14 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_node
 // main.c
 int		main(int argc, char **argv);
 void	print_list(t_node *head); //
+void	print_rev_list(t_node *head);
 
 // init_parsing.c
 void	check_space(const char **str);

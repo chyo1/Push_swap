@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 14:25:29 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/02 19:40:43 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/05 12:47:22 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,6 @@ void	asc_to_a(t_node **a, t_node **b)
 {
 	long long	num[3];
 	int			flag;
-	t_node		*last;
 
 	flag = 0;
 	del_flag_a((*a)->pre, *b, (*b)->pre, FIR);
@@ -47,7 +46,6 @@ void	asc_to_a(t_node **a, t_node **b)
 		{
 			flag = 1;
 			(*a)->end = TRUE;
-			last = *a;
 		}
 	}
 	while((*a)->pre->end != TRUE)
@@ -78,7 +76,6 @@ void	desc_to_a(t_node **a, t_node **b)
 {
 	long long	num[3];
 	int			flag;
-	t_node		*last;
 
 	flag = 0;
 	del_flag_a((*a)->pre, *b, (*b)->pre, FIR);
@@ -109,7 +106,6 @@ void	desc_to_a(t_node **a, t_node **b)
 		{
 			flag = 1;
 			(*a)->end = TRUE;
-			last = *a;
 		}
 	}
 	while((*a)->pre->end != TRUE)
