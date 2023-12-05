@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:46:44 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/02 22:19:37 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/05 17:33:02 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,24 +25,6 @@ void	init_div(t_node **a, t_node **b, int cnt, int order)
 			order_under_6(a, b, 5, ASC);
 		order_under_6(a, b, 5, DESC);
 		return ;
-	}
-	else if (cnt == 16)
-	{
-		init_div(a, b, 5, ASC);
-		if (order == ASC) // ㅇㅇㅈ
-			init_div(a, b, 5, DESC);
-		else if (order == DESC) // ㅇㅈㅈ
-			init_div(a, b, 5, ASC);
-		return (order_excep(a, b, DESC, 16));
-	}
-	else if (cnt == 17)
-	{
-		init_div(a, b, 5, ASC);
-		if (order == ASC) // ㅇㅇㅈ
-			order_excep(a, b, DESC, 17);
-		else if (order == DESC) // ㅇㅈㅈ
-			order_excep(a, b, ASC, 17);
-		return (order_excep(a, b, DESC, 16));
 	}
 	if (cnt < 6)
 	{
@@ -99,7 +81,7 @@ void	order_excep(t_node **a, t_node **b, int order, int which)
 {
 	if (order == ASC) // ㅈㅈㅇ
 	{
-		order_under_6(a, b, 2, ASC); // 1 bottom_a  ASC
+		order_under_6(a, b, 2, ASC); //  1 bottom_a  ASC
 		order_under_6(a, b, 2, ASC); //  2 top_a     DESC
 		order_under_6(a, b, 2, ASC); //  3 bottom_b  ASC
 		exep_merge_to_b(a, b, ASC, which);
@@ -168,4 +150,89 @@ void	exep_merge_to_b(t_node **a, t_node **b, int order, int which)
 	// printf("\n--------------reverse flag-----------\n");
 	// print_list(*a);
 	// print_list(*b);
+}
+
+void	init_div_exep(t_node **a, t_node **b, int cnt, int order)
+{
+	if (cnt == 14)
+	{
+		order_under_6(a, b, 4, ASC);
+		if (order == ASC) // ㅇㅇㅈ
+			order_under_6(a, b, 5, DESC);
+		else if (order == DESC) // ㅇㅈㅈ
+			order_under_6(a, b, 5, ASC);
+		order_under_6(a, b, 5, DESC);
+		return ;
+	}
+	else if (cnt == 16)
+	{
+		init_div(a, b, 5, ASC);
+		if (order == ASC) // ㅇㅇㅈ
+			init_div(a, b, 5, DESC);
+		else if (order == DESC) // ㅇㅈㅈ
+			init_div(a, b, 5, ASC);
+		return (order_excep(a, b, DESC, 16));
+	}
+	else if (cnt == 17)
+	{
+		init_div(a, b, 5, ASC);
+		if (order == ASC) // ㅇㅇㅈ
+			order_excep(a, b, DESC, 17);
+		else if (order == DESC) // ㅇㅈㅈ
+			order_excep(a, b, ASC, 17);
+		return (order_excep(a, b, DESC, 16));
+	}
+	else if (cnt == 18)
+	{
+		order_excep(a, b, ASC, 17);
+		if (order == ASC) // ㅇㅇㅈ
+			order_excep(a, b, DESC, 17);
+		else if (order == DESC) // ㅇㅈㅈ
+			order_excep(a, b, ASC, 17);
+		return (order_excep(a, b, DESC, 16));
+	}
+	else if (cnt == 53)
+	{
+		// order_excep(a, b, DESC, 18)
+		order_excep(a, b, ASC, 17);
+		if (order == ASC) // ㅇㅇㅈ
+			order_excep(a, b, DESC, 17);
+		else if (order == DESC) // ㅇㅈㅈ
+			order_excep(a, b, ASC, 17);
+		order_excep(a, b, DESC, 17);
+
+		// order_excep(a, b, DESC, 18)
+		if (order == ASC) // ㅇㅇㅈ
+		{
+			order_excep(a, b, ASC, 17);
+			if (order == ASC) // ㅇㅇㅈ
+				order_excep(a, b, DESC, 17);
+			else if (order == DESC) // ㅇㅈㅈ
+				order_excep(a, b, ASC, 17);
+			order_excep(a, b, DESC, 17);
+		}
+		else if (order == DESC) // ㅇㅈㅈ
+		{
+			order_excep(a, b, ASC, 17);
+			if (order == ASC) // ㅇㅇㅈ
+				order_excep(a, b, DESC, 17);
+			else if (order == DESC) // ㅇㅈㅈ
+				order_excep(a, b, ASC, 17);
+			order_excep(a, b, DESC, 17);
+		}
+
+		// order_excep(a, b, DESC, 17)
+		return (order_excep(a, b, 17, DESC));
+	}
+	if (cnt < 6)
+	{
+		order_under_6(a, b, cnt, order);
+		return ;
+	}
+	init_div_exep(a, b, cnt / 3, ASC);
+	if (order == ASC) // ㅇㅇㅈ
+		init_div_exep(a, b, cnt / 3, DESC);
+	else if (order == DESC) // ㅇㅈㅈ
+		init_div_exep(a, b, cnt / 3, ASC);
+	return (init_div_exep(a, b, cnt - 2 * (cnt / 3), DESC));
 }

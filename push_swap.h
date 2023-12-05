@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:28 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/05 13:20:14 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/05 15:47:33 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ typedef struct s_node
 int		main(int argc, char **argv);
 void	print_list(t_node *head); //
 void	print_rev_list(t_node *head);
+int		check_exep(int cnt); //
 
 // init_parsing.c
 void	check_space(const char **str);
@@ -94,6 +95,7 @@ int		check_order(t_node *head);
 void	order_under_6(t_node **a, t_node **b, int cnt, int order);
 void	order_excep(t_node **a, t_node **b, int order, int which);
 void	exep_merge_to_b(t_node **a, t_node **b, int order, int which);
+void	init_div_exep(t_node **a, t_node **b, int cnt, int order);
 
 // merge.c
 void	merge(t_node **a, t_node **b, int tri_size, int tri_cnt);
