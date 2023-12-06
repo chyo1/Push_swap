@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:19:41 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/05 17:28:24 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/06 16:31:42 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,12 +36,11 @@ int	main(int argc, char **argv)
 		i++;
 	}
 	flag = check_exep(cnt);
-	printf("flag : %d\n", flag);
+	// printf("flag : %d\n", flag);
 	if (flag)
 		init_div_exep(&head_a, &head_b, cnt, ASC);
 	else
 		init_div(&head_a, &head_b, cnt, ASC);
-	// printf("\n cnt : %d\n", cnt);
 	printf("\n----init divide to b----\n");
 	print_list(head_b);
 	// printf("\n------------merge-------------\n");

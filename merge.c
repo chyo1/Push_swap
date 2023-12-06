@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:43:31 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/05 17:00:27 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/06 13:48:04 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void	merge_to_a(t_node **a, t_node **b, int tri_cnt)
 	reverse_list_flag(*a);
 	// printf("\n--------merge_to_a--------\n");
 	// print_list(*a);
-	// // print_list(*b);
+	// print_list(*b);
 }
 
 void	merge_to_b(t_node **a, t_node **b, int tri_cnt)

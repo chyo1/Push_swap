@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/12/02 19:38:12 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/02 22:15:29 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/05 18:34:01 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,7 +85,7 @@ void	del_flag_exep(t_node *end_b, t_node *fir_a, int flag, int which)
 		}
 		else
 		{
-			if (end_b->start == TRUE && end_b->pre->start == TRUE)
+			if (end_b->start == TRUE && end_b->pre->start == TRUE) // 53 ㅇㅖ오ㅣ처리 하기, pre->end == true
 				end_b->start = FALSE;
 			if ((fir_a->start == TRUE) && (fir_a->next->start == FALSE && fir_a->next->end == FALSE))
 				fir_a->start = FALSE;
