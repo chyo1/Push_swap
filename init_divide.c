@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:46:44 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/06 18:54:36 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/06 19:27:30 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,20 +37,6 @@ void	init_div(t_node **a, t_node **b, int cnt, int order)
 	else if (order == DESC) // ㅇㅈㅈ
 		init_div(a, b, cnt / 3, ASC);
 	return (init_div(a, b, cnt - 2 * (cnt / 3), DESC));
-}
-
-int	check_order(t_node *head)
-{
-	t_node	*now;
-
-	now = head;
-	while (now->next != head)
-	{
-		if (now->val > now->next->val)
-			return (0);
-		now = now->next;
-	}
-	return (1);
 }
 void	order_under_6(t_node **a, t_node **b, int cnt, int order)
 {
@@ -193,41 +179,6 @@ void	init_div_exep(t_node **a, t_node **b, int cnt, int order)
 	}
 	else if (cnt == 53)
 	{
-		// // order_excep(a, b, 17, DESC);
-		// init_div(a, b, 5, ASC);
-		// if (order == ASC) // ㅇㅇㅈ
-		// 	order_excep(a, b, DESC, 17);
-		// else if (order == DESC) // ㅇㅈㅈ
-		// 	order_excep(a, b, ASC, 17);
-		// order_excep(a, b, DESC, 17);
-
-		// // order_excep(a, b, DESC, 18)
-		// if (order == ASC) // ㅇㅇㅈ
-		// {
-		// 	order_excep(a, b, ASC, 17);
-		// 	if (order == ASC) // ㅇㅇㅈ
-		// 		order_excep(a, b, ASC, 17);
-		// 	else if (order == DESC) // ㅇㅈㅈ
-		// 		order_excep(a, b, DESC, 17);
-		// 	order_excep(a, b, DESC, 17);
-		// }
-		// else if (order == DESC) // ㅇㅈㅈ
-		// {
-		// 	order_excep(a, b, ASC, 17);
-		// 	if (order == ASC) // ㅇㅇㅈ
-		// 		order_excep(a, b, ASC, 17);
-		// 	else if (order == DESC) // ㅇㅈㅈ
-		// 		order_excep(a, b, DESC, 17);
-		// 	order_excep(a, b, DESC, 17);
-		// }
-		// // order_excep(a, b, 18, DESC);
-		// order_excep(a, b, ASC, 17);
-		// if (order == ASC) // ㅇㅇㅈ
-		// 	order_excep(a, b, ASC, 17);
-		// else if (order == DESC) // ㅇㅈㅈ
-		// 	order_excep(a, b, DESC, 17);
-		// order_excep(a, b, DESC, 16);
-		// return ;
 		case_53(a, b, order, cnt);
 		return ;
 	}
@@ -295,21 +246,4 @@ void	case_53(t_node **a, t_node **b, int order, int cnt)
 	// else if (order == DESC) // ㅇㅈㅈ
 	// 	init_div_exep(a, b, cnt / 3, ASC);
 	// return (init_div_exep(a, b, cnt - 2 * (cnt / 3), DESC));
-}
-
-int is_last_div(t_node *a)
-{
-	int	cnt;
-	t_node	*now;
-
-	cnt = 0;
-	now = a;
-	while (now->next != a)
-	{
-		cnt++;
-		now = now->next;
-	}
-	if (cnt + 1 == 6)
-		return (1);
-	return (0);
 }

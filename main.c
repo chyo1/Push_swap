@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:19:41 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/06 16:31:42 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/06 19:47:26 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,23 @@ int	main(int argc, char **argv)
 		}
 		i++;
 	}
+	if (check_order(head_a))
+		return (0);
+	if (cnt < 6)
+	{
+		init_div(&head_a, &head_b, cnt, DESC);
+		while (head_b)
+			push_a(&head_a, &head_b);
+		return (0);
+	}
 	flag = check_exep(cnt);
 	// printf("flag : %d\n", flag);
 	if (flag)
 		init_div_exep(&head_a, &head_b, cnt, ASC);
 	else
 		init_div(&head_a, &head_b, cnt, ASC);
-	printf("\n----init divide to b----\n");
-	print_list(head_b);
+	// printf("\n----init divide to b----\n");
+	// print_list(head_b);
 	// printf("\n------------merge-------------\n");
 	merge(&head_a, &head_b, cnt, 1);
 	// print_list(head_b);
@@ -54,8 +63,6 @@ int	main(int argc, char **argv)
 			push_a(&head_a, &head_b);
 		}
 	}
-	// printf("\nresult\n");
-	// print_list(head_a);
 }
 
 void	print_list(t_node *head)
@@ -112,4 +119,18 @@ int	check_exep(int cnt)
 	if (check_exep(cnt - 2 * (cnt / 3)) == 1)
 		return (1);
 	return (0);
+}
+
+int	check_order(t_node *head)
+{
+	t_node	*now;
+
+	now = head;
+	while (now->next != head)
+	{
+		if (now->val > now->next->val)
+			return (0);
+		now = now->next;
+	}
+	return (1);
 }
