@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:43:31 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/06 13:48:04 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/06 18:57:00 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	merge(t_node **a, t_node **b, int tri_size, int tri_cnt)
 {
 	if (tri_size < 6)
 		return ;
-	else if (tri_size == 53)
+	else if (tri_size == 53 && tri_cnt == 1)
 	{
 		merge_to_a(a, b, 3);
 		merge_to_b(a, b, 1);
