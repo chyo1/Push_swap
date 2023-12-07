@@ -17,13 +17,6 @@ void	desc_12(t_node **a, t_node **b, int cnt)
 	t_node	*start;
 	t_node	*sec;
 
-	if (cnt == 1)
-	{
-		push_b(a, b);
-		(*b)->start = TRUE;
-		(*b)->end = TRUE;
-		return ;
-	}
 	start = *a;
 	sec = (*a)->next;
 	
@@ -37,22 +30,24 @@ void	desc_12(t_node **a, t_node **b, int cnt)
 
 void	desc_3(t_node **a, t_node **b, int is_start)
 {
-	t_node	*start;
+	t_node	*fir;
 	t_node	*sec;
 	t_node	*thi;
 	int i;
 	int flag;
 
-	start = *a;
-	sec = start->next;
-	thi = start->pre;
+	fir = *a;
+	sec = fir->next;
+	thi = fir->pre;
 	i = -1;
+
 	// b a c / c a b / c b a --> a b c / a c b / b c a
-	if (sec->val < start->val)
+	if (sec->val < fir->val)
 		swap(*a, *b, 'a');
-	if (thi->val < start->val && thi->val < sec->val)
+
+	if (thi->val < fir->val && thi->val < sec->val)
 		flag = 0;
-	else if (start->val < thi->val && sec->val < thi->val)
+	else if (fir->val < thi->val && sec->val < thi->val)
 		flag = 2;
 	else
 		flag = 1;
@@ -61,6 +56,7 @@ void	desc_3(t_node **a, t_node **b, int is_start)
 		if (i == flag)
 			reverse_rotate(a, b, 'a');
 		push_b(a, b);
+
 		if (is_start == TRUE && i == 0)
 			(*b)->start = TRUE;
 	}
@@ -75,6 +71,7 @@ void	desc_4(t_node **a, t_node **b, int is_start)
 	n[1] = ((*a)->next)->val; // sec
 	n[2] = (((*a)->next)->next)->val; // third
 	n[3] = ((*a)->pre)->val; // end
+
 	if (n[0] < n[1] && n[0] < n[2] && n[0] < n[3])
 		push_b(a, b);
 	else if (n[1] < n[0] && n[1] < n[2] && n[1] < n[3])
@@ -109,6 +106,7 @@ void	desc_5(t_node **a, t_node **b)
 	n[2] = (((*a)->next)->next)->val; // third
 	n[3] = ((*a)->pre)->val; // end
 	n[4] = (((*a)->pre)->pre)->val; // pre-end
+
 	if (n[0] < n[1] && n[0] < n[2] && n[0] < n[3] && n[0] < n[4])
 	{
 		push_b(a, b);
@@ -140,6 +138,7 @@ void	desc_5(t_node **a, t_node **b)
 		push_b(a, b);
 		rotate(a, b, 'a');
 	}
+
 	(*b)->start = TRUE;
 	desc_4(a, b, FALSE);
 }

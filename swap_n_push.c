@@ -14,11 +14,11 @@
 
 void	swap(t_node *a, t_node *b, char which)
 {
-	if (which == 'a' && swap_a(a) == 1)
+	if (which == 'a' && swap_a(a) == TRUE)
 		write(1, "sa\n", 3);
-	if (which == 'b' && swap_b(b) == 1)
+	if (which == 'b' && swap_b(b) == TRUE)
 		write(1, "sb\n", 3);
-	if (which == 'c' && (swap_a(a) == 1 || swap_b(b) == 1))
+	if (which == 'c' && (swap_a(a) == TRUE || swap_b(b) == TRUE))
 		write(1, "ss\n", 3);
 }
 
@@ -29,13 +29,13 @@ int	swap_a(t_node *a)
 	long long	tmp;
 
 	if (a == NULL || a->next == NULL)
-		return (0);
+		return (FALSE);
 	fir = a;
 	sec = a->next;
 	tmp = fir->val;
 	fir->val = sec->val;
 	sec->val = tmp;
-	return (1);
+	return (TRUE);
 }
 
 int	swap_b(t_node *b)
@@ -45,13 +45,13 @@ int	swap_b(t_node *b)
 	long long	tmp;
 
 	if (b == NULL || b->next == NULL)
-		return (0);
+		return (FALSE);
 	fir = b;
 	sec = b->next;
 	tmp = fir->val;
 	fir->val = sec->val;
 	sec->val = tmp;
-	return (1);
+	return (TRUE);
 }
 
 void	push_a(t_node **s1, t_node **s2)

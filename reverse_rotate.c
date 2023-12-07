@@ -14,11 +14,11 @@
 
 void	reverse_rotate(t_node **s1, t_node **s2, char which)
 {
-	if (which == 'a' && reverse_rotate_a(s1) == 1)
+	if (which == 'a' && reverse_rotate_a(s1) == TRUE)
 		write(1, "rra\n", 4);
-	if (which == 'b' && reverse_rotate_b(s2) == 1)
+	if (which == 'b' && reverse_rotate_b(s2) == TRUE)
 		write(1, "rrb\n", 4);
-	if (which == 'c' && (reverse_rotate_a(s1) == 1 || reverse_rotate_b(s2) == 1))
+	if (which == 'c' && (reverse_rotate_a(s1) == TRUE || reverse_rotate_b(s2) == TRUE))
 		write(1, "rrr\n", 4);
 }
 
@@ -28,9 +28,9 @@ int	reverse_rotate_a(t_node **s1)
 
 	node = pop_back(s1);
 	if (node == NULL)
-		return (0);
+		return (FALSE);
 	push_front(s1, node);
-	return (1);
+	return (TRUE);
 }
 
 int	reverse_rotate_b(t_node **s2)
@@ -39,8 +39,8 @@ int	reverse_rotate_b(t_node **s2)
 
 	node = pop_back(s2);
 	if (node == NULL)
-		return (0);
+		return (FALSE);
 	push_front(s2, node);
-	return (1);
+	return (TRUE);
 }
 

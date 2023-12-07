@@ -34,7 +34,7 @@ void	merge_to_a(t_node **a, t_node **b, int tri_cnt)
 	int	cnt;
 
 	cnt = 0;
-	// move to a
+	// move num 1/3 to a
 	while (tri_cnt != cnt)
 	{
 		if ((*b)->start == TRUE)
@@ -114,6 +114,8 @@ void	reverse_list_flag(t_node *head)
 		}
 		now = now->next;
 	}
+
+	// last node
 	if (now->start == TRUE)
 	{
 		now->start = FALSE;
