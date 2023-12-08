@@ -27,7 +27,7 @@ int	make_node(t_node **head, long long val)
 	new_node->start = FALSE;
 	new_node->end = FALSE;
 
-	// link with exist nodes
+	// check whether val is exist
 	if (*head == NULL)
 	{
 		push_back(head, new_node);
