@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/29 12:43:31 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/06 18:57:00 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/08 12:07:43 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ void	merge_to_a(t_node **a, t_node **b, int tri_cnt)
 	int	cnt;
 
 	cnt = 0;
-	// move to a
+	// move num 1/3 to a
 	while (tri_cnt != cnt)
 	{
 		if ((*b)->start == TRUE)
@@ -54,7 +54,7 @@ void	merge_to_a(t_node **a, t_node **b, int tri_cnt)
 		else // desc
 			desc_to_a(a, b);
 		cnt--;
-	} 
+	}
 	reverse_list_flag(*a);
 	// printf("\n--------merge_to_a--------\n");
 	// print_list(*a);
@@ -114,6 +114,8 @@ void	reverse_list_flag(t_node *head)
 		}
 		now = now->next;
 	}
+
+	// last node
 	if (now->start == TRUE)
 	{
 		now->start = FALSE;

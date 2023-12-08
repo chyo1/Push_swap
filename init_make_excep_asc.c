@@ -1,7 +1,7 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exep_asc_merge_to_b.c                              :+:      :+:    :+:   */
+/*   excep_asc_merge_to_b.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
@@ -12,13 +12,13 @@
 
 #include "push_swap.h"
 
-void	exep_asc_to_b(t_node **a, t_node **b, int which)
+void	excep_asc_to_b(t_node **a, t_node **b, int which)
 {
 	long long	num[3];
 	int			flag[3];
 
 	flag[0] = flag[1] = flag[2] = 0;
-	del_flag_exep((*b)->pre, *a, FIR, which);
+	del_flag_excep((*b)->pre, *a, FIR, which);
 	while (*a)
 	{
 		num[0] = (*b)->pre->val; 	// end_b -> f
@@ -30,7 +30,8 @@ void	exep_asc_to_b(t_node **a, t_node **b, int which)
 			num[1] = INT_MIN;
 		if (flag[2] >= 2) // end_a -> start
 			num[2] = INT_MIN;
-		del_flag_exep((*b)->pre, *a, MID, which);
+
+		del_flag_excep((*b)->pre, *a, MID, which);
 		if (num[0] == INT_MIN && num[1] == INT_MIN && num[2] == INT_MIN)
 			break ;
 		if (num[1] < num[0] && num[2] < num[0])

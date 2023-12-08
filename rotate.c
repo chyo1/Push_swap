@@ -14,11 +14,11 @@
 
 void	rotate(t_node **s1, t_node **s2, char which)
 {
-	if (which == 'a' && rotate_a(s1) == 1)
+	if (which == 'a' && rotate_a(s1) == TRUE)
 		write(1, "ra\n", 3);
-	if (which == 'b' && rotate_b(s2) == 1)
+	if (which == 'b' && rotate_b(s2) == TRUE)
 		write(1, "rb\n", 3);
-	if (which == 'c' && (rotate_a(s1) == 1 || rotate_b(s2) == 1))
+	if (which == 'c' && (rotate_a(s1) == TRUE || rotate_b(s2) == TRUE))
 		write(1, "rr\n", 3);
 }
 
@@ -28,9 +28,9 @@ int	rotate_a(t_node **s1)
 
 	node = pop_front(s1);
 	if (node == NULL)
-		return (0);
+		return (FALSE);
 	push_back(s1, node);
-	return (1);
+	return (TRUE);
 }
 
 int	rotate_b(t_node **s2)
@@ -39,7 +39,7 @@ int	rotate_b(t_node **s2)
 
 	node = pop_front(s2);
 	if (node == NULL)
-		return (0);
+		return (FALSE);
 	push_back(s2, node);
-	return (1);
+	return (TRUE);
 }

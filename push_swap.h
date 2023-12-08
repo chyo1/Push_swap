@@ -5,6 +5,19 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/12/08 12:03:16 by hyowchoi          #+#    #+#             */
+/*   Updated: 2023/12/08 12:26:52 by hyowchoi         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   push_swap.h                                        :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:20:28 by hyowchoi          #+#    #+#             */
 /*   Updated: 2023/12/05 15:47:33 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
@@ -40,24 +53,9 @@ typedef struct s_node
 
 // main.c
 int		main(int argc, char **argv);
-void	print_list(t_node *head); //
-void	print_rev_list(t_node *head);
-int		check_exep(int cnt); //
-
-// init_parsing.c
-void	check_space(const char **str);
-void	check_sign(const char **str, int *minus);
-int		parsing(const char *str, t_node **root, int *cnt);
-
-// init_connect_del.c
-int		make_node(t_node **head, long long val);
-void	free_list(t_node **head);
-
-// push_pop.c
-void	push_front(t_node **head, t_node *new);
-void	push_back(t_node **head, t_node *new);
-t_node	*pop_front(t_node **head);
-t_node	*pop_back(t_node **head);
+// void	print_list(t_node *head); //
+// void	print_rev_list(t_node *head);
+// int		check_excep(int cnt); //
 
 // swap_n_push.c
 int		swap_a(t_node *a);
@@ -77,14 +75,46 @@ t_node	*get_prelast_node(t_node *node);
 int		reverse_rotate_a(t_node **s1);
 int		reverse_rotate_b(t_node **s2);
 
+// under_6_code.c
+void	order(t_node *a, t_node *b, int cnt);
+void	order_2(t_node *a);
+void	order_3(t_node *a, t_node *b);
+void	order_4(t_node *a, t_node *b);
+void	order_5(t_node *a, t_node *b);
+
+// init_parsing_n_check_exception.c
+void	check_space(const char **str);
+int		check_sign(const char **str);
+int		parsing(const char *str, t_node **root, int *cnt);
+int		check_order(t_node *head);
+int		check_excep(int cnt);
+
+// init_connect_del.c
+int		make_node(t_node **head, long long val);
+void	free_list(t_node **head);
+
+// init_make_excep_asc.c
+void	excep_asc_to_b(t_node **a, t_node **b, int which);
+// void	del_flag_b(t_node *end_b, *fir_a, int flag, int which);
+
+// init_make_excep_desc.c
+void	excep_desc_to_b(t_node **a, t_node **b, int which);
+void	del_flag_excep(t_node *end_b, t_node *fir_a, int flag, int which);
+
+// push_pop.c
+void	push_front(t_node **head, t_node *new);
+void	push_back(t_node **head, t_node *new);
+t_node	*pop_front(t_node **head);
+t_node	*pop_back(t_node **head);
+
 // init_make_asc.c
-void	asc_12(t_node **a, t_node **b, int cnt);
+void	asc_2(t_node **a, t_node **b);
 void	asc_3(t_node **a, t_node **b, int is_start);
 void	asc_4(t_node **a, t_node **b, int is_start);
 void	asc_5(t_node **a, t_node **b);
 
 // init_make_desc.c
-void	desc_12(t_node **a, t_node **b, int cnt);
+void	desc_2(t_node **a, t_node **b);
 void	desc_3(t_node **a, t_node **b, int is_start);
 void	desc_4(t_node **a, t_node **b, int is_start);
 void	desc_5(t_node **a, t_node **b);
@@ -94,8 +124,14 @@ void	init_div(t_node **a, t_node **b, int cnt, int order);
 int		check_order(t_node *head);
 void	order_under_6(t_node **a, t_node **b, int cnt, int order);
 void	order_excep(t_node **a, t_node **b, int order, int which);
-void	exep_merge_to_b(t_node **a, t_node **b, int order, int which);
-void	init_div_exep(t_node **a, t_node **b, int cnt, int order);
+void	excep_merge_to_b(t_node **a, t_node **b, int order, int which);
+void	init_div_excep(t_node **a, t_node **b, int cnt, int order);
+
+// init_divide_excep.c
+void	order_excep(t_node **a, t_node **b, int order, int which);
+void	order_excep(t_node **a, t_node **b, int order, int which);
+void	case_53(t_node **a, t_node **b, int order, int cnt);
+void	excep_merge_to_b(t_node **a, t_node **b, int order, int which);
 
 // merge.c
 void	merge(t_node **a, t_node **b, int tri_size, int tri_cnt);
@@ -113,11 +149,4 @@ void	asc_to_b(t_node **a, t_node **b);
 void	desc_to_b(t_node **a, t_node **b);
 void	del_flag_b(t_node *end_b, t_node *fir_a, t_node *end_a, int flag);
 
-// exep_asc_merge_to_b.c
-void	exep_asc_to_b(t_node **a, t_node **b, int which);
-// void	del_flag_b(t_node *end_b, t_node *fir_a, int flag, int which);
-
-// exep_desc_merge_to_b.c
-void	exep_desc_to_b(t_node **a, t_node **b, int which);
-void	del_flag_exep(t_node *end_b, t_node *fir_a, int flag, int which);
 #endif
