@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:46:44 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/06 19:27:30 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/08 12:23:33 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ void	order_under_6(t_node **a, t_node **b, int cnt, int order)
 	if (order == ASC)
 	{
 		if (cnt <= 2)
-			asc_12(a, b, cnt);
+			asc_2(a, b);
 		else if (cnt == 3)
 			asc_3(a, b, TRUE);
 		else if (cnt == 4)
@@ -56,7 +56,7 @@ void	order_under_6(t_node **a, t_node **b, int cnt, int order)
 	else if (order == DESC)
 	{
 		if (cnt <= 2)
-			desc_12(a, b, cnt);
+			desc_2(a, b);
 		else if (cnt == 3)
 			desc_3(a, b, TRUE);
 		else if (cnt == 4)

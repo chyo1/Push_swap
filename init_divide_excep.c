@@ -9,18 +9,18 @@ void	order_excep(t_node **a, t_node **b, int order, int which)
 		order_under_6(a, b, 2, ASC); 	//  1 bottom_a  ASC
 		order_under_6(a, b, 2, ASC); 	//  2 top_a     DESC
 		order_under_6(a, b, 2, ASC); 	//  3 bottom_b  ASC
-		exep_merge_to_b(a, b, ASC, which);
+		excep_merge_to_b(a, b, ASC, which);
 	}
 	else // ㅇㅇㅈ
 	{
 		order_under_6(a, b, 2, DESC); 	// bottom_a  DESC
 		order_under_6(a, b, 2, DESC); 	//  top_a    ASC
 		order_under_6(a, b, 2, DESC); 	//  bottom_b DESC
-		exep_merge_to_b(a, b, DESC, which);
+		excep_merge_to_b(a, b, DESC, which);
 	}
 }
 
-void	init_div_exep(t_node **a, t_node **b, int cnt, int order)
+void	init_div_excep(t_node **a, t_node **b, int cnt, int order)
 {
 	// change 4 4 6 -> 4 5 5
 	if (cnt == 14)
@@ -77,12 +77,12 @@ void	init_div_exep(t_node **a, t_node **b, int cnt, int order)
 	// 	return ;
 	// }
 
-	init_div_exep(a, b, cnt / 3, ASC);
+	init_div_excep(a, b, cnt / 3, ASC);
 	if (order == ASC) // ㅇㅇㅈ
-		init_div_exep(a, b, cnt / 3, DESC);
+		init_div_excep(a, b, cnt / 3, DESC);
 	else if (order == DESC) // ㅇㅈㅈ
-		init_div_exep(a, b, cnt / 3, ASC);
-	return (init_div_exep(a, b, cnt - 2 * (cnt / 3), DESC));
+		init_div_excep(a, b, cnt / 3, ASC);
+	return (init_div_excep(a, b, cnt - 2 * (cnt / 3), DESC));
 }
 
 void	case_53(t_node **a, t_node **b, int order, int cnt)
@@ -130,15 +130,15 @@ void	case_53(t_node **a, t_node **b, int order, int cnt)
 	// if (cnt < 6)
 	// 	return (order_under_6(a, b, cnt, order));
 
-	// init_div_exep(a, b, cnt / 3, ASC);
+	// init_div_excep(a, b, cnt / 3, ASC);
 	// if (order == ASC) // ㅇㅇㅈ
-	// 	init_div_exep(a, b, cnt / 3, DESC);
+	// 	init_div_excep(a, b, cnt / 3, DESC);
 	// else if (order == DESC) // ㅇㅈㅈ
-	// 	init_div_exep(a, b, cnt / 3, ASC);
-	// return (init_div_exep(a, b, cnt - 2 * (cnt / 3), DESC));
+	// 	init_div_excep(a, b, cnt / 3, ASC);
+	// return (init_div_excep(a, b, cnt - 2 * (cnt / 3), DESC));
 }
 
-void	exep_merge_to_b(t_node **a, t_node **b, int order, int which)
+void	excep_merge_to_b(t_node **a, t_node **b, int order, int which)
 {
 	int	i;
 
@@ -172,10 +172,10 @@ void	exep_merge_to_b(t_node **a, t_node **b, int order, int which)
 	}
 
 	if (order == ASC)
-		exep_asc_to_b(a, b, which);
+		excep_asc_to_b(a, b, which);
 	// desc
 	else
-		exep_desc_to_b(a, b, which);
+		excep_desc_to_b(a, b, which);
 
 	// reverse flag
 	t_node *last = *b;

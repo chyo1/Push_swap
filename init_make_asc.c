@@ -6,19 +6,19 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:55:58 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/02 16:43:13 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/08 12:22:14 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	asc_12(t_node **a, t_node **b, int cnt)
+void	asc_2(t_node **a, t_node **b)
 {
 	t_node	*start;
 	t_node	*sec;
 
 	start = *a;
-	sec = (*a)->next;	
+	sec = (*a)->next;
 	if (start->val < sec->val)
 		swap(*a, *b, 'a');
 

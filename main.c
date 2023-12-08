@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/22 17:19:41 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/06 19:47:26 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/08 12:25:25 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int	main(int argc, char **argv)
 	t_node	*head_a;
 	t_node	*head_b;
 	int		cnt_argv;
-	int 	is_excep;
+	int		is_excep;
 
 	// init
 	i = 1;
 	cnt_argv = 0;
 	head_a = NULL;
 	head_b = NULL;
-	
+
 	while (i < argc)
 	{
 		if (parsing(argv[i], &head_a, &cnt_argv) == -1)
@@ -44,17 +44,17 @@ int	main(int argc, char **argv)
 	// simple sort
 	if (cnt_argv < 6)
 	{
-		order(a, b, cnt_argv);
+		order(head_a, head_b, cnt_argv);
 		return (0);
 	}
 
 	// exception case check : 16, 17, 53 is exception
-	is_excep = check_exep(cnt_argv);
+	is_excep = check_excep(cnt_argv);
 	if (is_excep)
-		init_div_exep(&head_a, &head_b, cnt_argv, ASC);
+		init_div_excep(&head_a, &head_b, cnt_argv, ASC);
 	else
 		init_div(&head_a, &head_b, cnt_argv, ASC);
-	
+
 	// sorting
 	merge(&head_a, &head_b, cnt_argv, 1);
 

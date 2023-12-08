@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init_parsing.c                                     :+:      :+:    :+:   */
+/*   init_parsing_n_check_exception.c                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:13:38 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/29 16:12:53 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/08 12:27:47 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	parsing(const char *str, t_node **head, int *cnt_argv)
 		num = 0;
 		flag = 0;
 		check_space(&str);
-		minus = check_sign(&str, &minus);
+		minus = check_sign(&str);
 	
 		// check is digit
 		while (*str && ('0' <= *str && *str <= '9'))
@@ -75,17 +75,17 @@ int	check_order(t_node *head)
 	return (1);
 }
 
-int	check_exep(int cnt)
+int	check_excep(int cnt)
 {
 	if (cnt < 6)
 		return (0);
 	if (cnt == 16 || cnt == 17)
 		return (1);
-	if (check_exep(cnt / 3) == 1)
+	if (check_excep(cnt / 3) == 1)
 		return (1);
-	if (check_exep(cnt / 3) == 1)
+	if (check_excep(cnt / 3) == 1)
 		return (1);
-	if (check_exep(cnt - 2 * (cnt / 3)) == 1)
+	if (check_excep(cnt - 2 * (cnt / 3)) == 1)
 		return (1);
 	return (0);
 }

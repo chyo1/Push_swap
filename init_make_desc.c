@@ -6,20 +6,20 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:32:33 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/02 16:43:30 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/08 12:22:33 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void	desc_12(t_node **a, t_node **b, int cnt)
+void	desc_2(t_node **a, t_node **b)
 {
 	t_node	*start;
 	t_node	*sec;
 
 	start = *a;
 	sec = (*a)->next;
-	
+
 	if (sec->val < start->val)
 		swap(*a, *b, 'a');
 	push_b(a, b);

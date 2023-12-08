@@ -14,8 +14,8 @@
 
 void	excep_asc_to_b(t_node **a, t_node **b, int which)
 {
-	int	num[3];
-	int	flag[3];
+	long long	num[3];
+	int			flag[3];
 
 	flag[0] = flag[1] = flag[2] = 0;
 	del_flag_excep((*b)->pre, *a, FIR, which);

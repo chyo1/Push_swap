@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 16:34:18 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/11/29 18:18:30 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2023/12/08 12:06:17 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	push_back(t_node **head, t_node *new_node)
 t_node	*pop_front(t_node **head)
 {
 	t_node	*ans;
-	
+
 	if (*head == NULL)
 		return (NULL);
 	if ((*head)->next == *head)
