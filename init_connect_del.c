@@ -12,7 +12,7 @@
 
 #include "push_swap.h"
 
-int	make_node(t_node **head, long long val)
+int	make_node(t_node **head, int val)
 {
 	t_node	*new_node;
 	t_node	*last;
