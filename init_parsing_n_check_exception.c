@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/23 11:13:38 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/08 12:27:47 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2024/01/14 16:54:06 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,10 +20,13 @@ void	check_space(const char **str)
 
 int	check_sign(const char **str)
 {
-	if (**str == '+' || **str == '-')
+	if (**str && (**str == '+' || **str == '-'))
 	{
 		if (**str == '-')
+		{
+			(*str)++;
 			return (-1);
+		}
 		(*str)++;
 	}
 	return (1);
@@ -33,28 +36,24 @@ int	parsing(const char *str, t_node **head, int *cnt_argv)
 {
 	long long	num;
 	int			minus;
-	int			flag;
 
+	if (*str == '\0')
+		return (-1);
 	while (*str)
 	{
 		num = 0;
-		flag = 0;
 		check_space(&str);
 		minus = check_sign(&str);
-	
-		// check is digit
+		if (!('0' <= *str && *str <= '9'))
+			return (-1);
 		while (*str && ('0' <= *str && *str <= '9'))
 		{
 			num = num * 10 + (*str - '0');
-			// int range error
 			if (minus * num < -2147483648 || minus * num > 2147483647)
 				return (-1);
 			str++;
-			flag = 1;
 		}
-
-		// check blank input & malloc error
-		if (!flag || make_node(head, minus * num) == -1)
+		if (make_node(head, minus * num) == -1)
 			return (-1);
 		(*cnt_argv)++;
 	}
@@ -83,10 +82,8 @@ int	check_excep(int cnt)
 		return (1);
 	if (check_excep(cnt / 3) == 1)
 		return (1);
-	if (check_excep(cnt / 3) == 1)
-		return (1);
-	if (check_excep(cnt - 2 * (cnt / 3)) == 1)
-		return (1);
+	if (cnt % 3)
+		if (check_excep(cnt / 3 + 1) == 1)
+			return (1);
 	return (0);
 }
-

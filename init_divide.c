@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 19:46:44 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/08 12:23:33 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2024/01/14 17:33:41 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,30 +14,25 @@
 
 void	init_div(t_node **a, t_node **b, int cnt, int order)
 {
-	// change 4 4 6 -> 4 5 5
-	if (cnt == 14)
-	{
-		order_under_6(a, b, 4, ASC);
-		if (order == ASC) // ㅇㅇㅈ
-			order_under_6(a, b, 5, DESC);
-		else if (order == DESC) // ㅇㅈㅈ
-			order_under_6(a, b, 5, ASC);
-		order_under_6(a, b, 5, DESC);
-		return ;
-	}
 	if (cnt < 6)
-	{
-		order_under_6(a, b, cnt, order);
-		return ;
-	}
-	// when cnt is over 6 -> have to divide
+		return (order_under_6(a, b, cnt, order));
 	init_div(a, b, cnt / 3, ASC);
-	if (order == ASC) // ㅇㅇㅈ
-		init_div(a, b, cnt / 3, DESC);
-	else if (order == DESC) // ㅇㅈㅈ
-		init_div(a, b, cnt / 3, ASC);
-	init_div(a, b, cnt - 2 * (cnt / 3), DESC);
-	return ;
+	if (cnt % 3 == 2)
+	{
+		if (order == ASC)
+			init_div(a, b, cnt / 3 + 1, DESC);
+		else if (order == DESC)
+			init_div(a, b, cnt / 3 + 1, ASC);
+		return (init_div(a, b, cnt / 3 + 1, DESC));
+	}
+	else
+	{
+		if (order == ASC)
+			init_div(a, b, cnt / 3, DESC);
+		else if (order == DESC)
+			init_div(a, b, cnt / 3, ASC);
+		return (init_div(a, b, cnt / 3 + cnt % 3, DESC));
+	}
 }
 
 void	order_under_6(t_node **a, t_node **b, int cnt, int order)
@@ -51,7 +46,9 @@ void	order_under_6(t_node **a, t_node **b, int cnt, int order)
 		else if (cnt == 4)
 			asc_4(a, b, TRUE);
 		else if (cnt == 5)
-			asc_5(a, b);
+			asc_5(a, b, TRUE);
+		else if (cnt == 6)
+			asc_6(a, b);
 	}
 	else if (order == DESC)
 	{
@@ -62,6 +59,8 @@ void	order_under_6(t_node **a, t_node **b, int cnt, int order)
 		else if (cnt == 4)
 			desc_4(a, b, TRUE);
 		else if (cnt == 5)
-			desc_5(a, b);
+			desc_5(a, b, TRUE);
+		else if (cnt == 6)
+			desc_6(a, b);
 	}
 }

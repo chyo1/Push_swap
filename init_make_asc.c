@@ -6,7 +6,7 @@
 /*   By: hyowchoi <hyowchoi@student.42seoul.kr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/11/27 13:55:58 by hyowchoi          #+#    #+#             */
-/*   Updated: 2023/12/08 12:22:14 by hyowchoi         ###   ########.fr       */
+/*   Updated: 2024/01/14 16:19:59 by hyowchoi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,34 +21,25 @@ void	asc_2(t_node **a, t_node **b)
 	sec = (*a)->next;
 	if (start->val < sec->val)
 		swap(*a, *b, 'a');
-
 	push_b(a, b);
 	(*b)->start = TRUE;
-
 	push_b(a, b);
 	(*b)->end = TRUE;
 }
 
 void	asc_3(t_node **a, t_node **b, int is_start)
 {
-	t_node	*fir;
-	t_node	*sec;
-	t_node	*thi;
-	int		i;
-	int		flag;
+	int	n[3];
+	int	i;
+	int	flag;
 
-	fir = *a;
-	sec = fir->next;
-	thi = fir->pre;
+	init_make_put_num(a, n, 3);
 	i = -1;
-
-	// a b c / a c b / b c a --> b a c / c a b / c b a
-	if (fir->val < sec->val)
+	if (n[0] < n[1])
 		swap(*a, *b, 'a');
-
-	if (fir->val < thi->val && sec->val < thi->val)
+	if (n[0] < n[2] && n[1] < n[2])
 		flag = 0;
-	else if (thi->val < fir->val && thi->val < sec->val)
+	else if (n[2] < n[0] && n[2] < n[1])
 		flag = 2;
 	else
 		flag = 1;
@@ -57,7 +48,6 @@ void	asc_3(t_node **a, t_node **b, int is_start)
 		if (i == flag)
 			reverse_rotate(a, b, 'a');
 		push_b(a, b);
-
 		if (is_start == TRUE && i == 0)
 			(*b)->start = TRUE;
 	}
@@ -68,47 +58,35 @@ void	asc_4(t_node **a, t_node **b, int is_start)
 {
 	int	n[4];
 
-	n[0] = (*a)->val; // start
-	n[1] = ((*a)->next)->val; // sec
-	n[2] = (((*a)->next)->next)->val; // third
-	n[3] = (*a)->pre->val;// end
-
-	if (n[1] < n[0] && n[2] < n[0] && n[3] < n[0])
-		push_b(a, b);
-	else if (n[0] < n[1] && n[2] < n[1] && n[3] < n[1])
-	{
+	init_make_put_num(a, n, 4);
+	if (n[0] < n[1] && n[2] < n[1] && n[3] < n[1])
 		swap(*a, *b, 'a');
-		push_b(a, b);
-	}
 	else if (n[0] < n[3] && n[1] < n[3] && n[2] < n[3])
-	{
 		reverse_rotate(a, b, 'a');
-		push_b(a, b);
-		rotate(a, b, 'a');
-	}
-	else
+	else if (n[0] < n[2] && n[1] < n[2] && n[3] < n[2])
 	{
 		rotate(a, b, 'a');
 		swap(*a, *b, 'a');
-		push_b(a, b);
-		reverse_rotate(a, b, 'a');
 	}
+	push_b(a, b);
+	if (n[1] < n[0] && n[2] < n[0] && n[3] < n[0])
+		;
+	else if (n[0] < n[1] && n[2] < n[1] && n[3] < n[1])
+		;
+	else if (n[0] < n[3] && n[1] < n[3] && n[2] < n[3])
+		rotate(a, b, 'a');
+	else
+		reverse_rotate(a, b, 'a');
 	if (is_start == TRUE)
 		(*b)->start = TRUE;
-
 	asc_3(a, b, FALSE);
 }
 
-void	asc_5(t_node **a, t_node **b)
+void	asc_5(t_node **a, t_node **b, int is_start)
 {
 	int	n[5];
 
-	n[0] = (*a)->val; // start
-	n[1] = ((*a)->next)->val; // sec
-	n[2] = (((*a)->next)->next)->val; // third
-	n[3] = ((*a)->pre)->val; // end
-	n[4] = (((*a)->pre)->pre)->val; // pre-end
-
+	init_make_put_num(a, n, 5);
 	if (n[1] < n[0] && n[2] < n[0] && n[3] < n[0] && n[4] < n[0])
 	{
 		push_b(a, b);
@@ -121,6 +99,19 @@ void	asc_5(t_node **a, t_node **b)
 		reverse_rotate(a, b, 'a');
 	}
 	else if (n[0] < n[2] && n[1] < n[2] && n[3] < n[2] && n[4] < n[2])
+		asc_5_do(a, b, 2);
+	else if (n[0] < n[3] && n[1] < n[3] && n[2] < n[3] && n[4] < n[3])
+		asc_5_do(a, b, 3);
+	else
+		asc_5_do(a, b, 4);
+	if (is_start == TRUE)
+		(*b)->start = TRUE;
+	asc_4(a, b, FALSE);
+}
+
+void	asc_5_do(t_node **a, t_node **b, int big_loc)
+{
+	if (big_loc == 2)
 	{
 		rotate(a, b, 'a');
 		swap(*a, *b, 'a');
@@ -128,19 +119,16 @@ void	asc_5(t_node **a, t_node **b)
 		reverse_rotate(a, b, 'a');
 		reverse_rotate(a, b, 'a');
 	}
-	else if (n[0] < n[3] && n[1] < n[3] && n[2] < n[3] && n[4] < n[3])
+	else if (big_loc == 3)
 	{
 		reverse_rotate(a, b, 'a');
 		push_b(a, b);
 	}
-	else
+	else if (big_loc == 4)
 	{
 		reverse_rotate(a, b, 'a');
 		reverse_rotate(a, b, 'a');
 		push_b(a, b);
 		rotate(a, b, 'a');
 	}
-
-	(*b)->start = TRUE;
-	asc_4(a, b, FALSE);
 }
